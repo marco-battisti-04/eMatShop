@@ -1,5 +1,16 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivate, CanActivateFn, Router } from '@angular/router';
+import { UserService } from '../services/userService/userService.service';
+import { inject } from '@angular/core';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  return true;
+export class AuthGuard implements CanActivate{
+  #service = inject(UserService);
+  #router = inject(Router);
+
+  canActivate() {
+    if(this.#service.userIDComp() != ""){
+      return true;
+    }
+    this.#router.navigate(['access'])
+    return false;
+  }
 };

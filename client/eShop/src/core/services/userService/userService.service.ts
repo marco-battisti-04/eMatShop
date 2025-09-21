@@ -1,11 +1,11 @@
 import { Injectable, signal, inject, computed } from '@angular/core';
-import { UserRequestRegister, UserResponseLogin, UserResponseRegister } from '../../model/user.model';
+import { UserResponseLogin, UserResponseRegister } from '../../model/user.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
   readonly #userID= signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
