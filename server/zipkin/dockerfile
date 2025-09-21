@@ -1,0 +1,7 @@
+FROM openjdk:21
+
+WORKDIR /app
+COPY zipkin.jar .
+
+EXPOSE 9411
+CMD [ "java", "-jar", "zipkin.jar"]
