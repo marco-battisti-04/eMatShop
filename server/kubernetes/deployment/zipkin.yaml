@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: zipkin-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: zipkin-service
+    spec:
+      containers:
+        - name: zipkin
+          image: zipkin:1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9411
+              name: zipkin-port

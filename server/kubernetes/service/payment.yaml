@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service
+spec:
+  selector:
+    app.kubernetes.io/name: payment-service
+  ports:
+  - protocol: TCP
+    port: 8900
+    targetPort: 8900
+  type: ClusterIP

@@ -1,0 +1,25 @@
+spring:
+  zipkin:
+    baseUrl: ${ZIPKIN_URI:http://localhost:9411/api/v2/spans}
+  application:
+    name: shop-gateway
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+server:
+  port: 9999
+
+#Zipkin config
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  #Actuator config
+  endpoints:
+    web:
+      exposure:
+        include: "*"

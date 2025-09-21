@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payment-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: payment-service
+    spec:
+      containers:
+        - name: payment
+          image: payment:1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8900
+              name: payment-port
+          env:
+            - name: EUREKA_URI
+              value: http://eureka-service:8761/eureka
+            - name: SPRING_CONFIG_IMPORT
+              value: optional:configserver:http://config-serevice:8888
+            - name: ZIPKIN_URI
+              value: http://zipkin-service:9411/api/v2/spans

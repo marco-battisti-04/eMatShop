@@ -1,0 +1,41 @@
+namespace: shop
+images loadded:
+  - eureka:1        --> 8761
+  - configserver:1 --> 8888
+  - zipkin:1        --> 9411
+  - shopgateway:1  --> 9999
+  - catalog:1       --> 8082
+  - payment:1       --> 8900
+  - purchase:1      --> 7500
+
+kubectl -n shop apply -f kubernetes/deployment/eureka.yaml 
+kubectl -n shop apply -f kubernetes/service/eureka.yaml
+
+kubectl -n shop apply -f kubernetes/deployment/config-server.yaml
+kubectl -n shop apply -f kubernetes/service/config-server.yaml
+
+kubectl -n shop apply -f kubernetes/deployment/shop-gateway.yaml
+kubectl -n shop apply -f kubernetes/service/shop-gateway.yaml
+
+
+kubectl -n shop apply -f kubernetes/deployment/catalog.yaml
+kubectl -n shop apply -f kubernetes/service/catalog.yaml
+
+kubectl -n shop apply -f kubernetes/deployment/purchase.yaml
+kubectl -n shop apply -f kubernetes/service/purchase.yaml
+
+kubectl -n shop apply -f kubernetes/deployment/payment.yaml
+kubectl -n shop apply -f kubernetes/service/payment.yaml
+
+kubectl -n shop apply -f kubernetes/deployment/zipkin.yaml
+kubectl -n shop apply -f kubernetes/service/zipkin.yaml
+
+#LANCIARE SEPARATAMENTE
+
+
+kubectl -n shop port-forward service/shop-gateway-service 9999:9999
+kubectl -n shop port-forward service/eureka-service 8761:8761
+
+# ENDPOINTS
+GET | localhost:9999/catalog
+PUT | localhost:9999/purchase/checkout/user body-> card

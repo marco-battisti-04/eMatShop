@@ -1,0 +1,120 @@
+services:
+  catalog:
+    build:
+      context: ./Catalog
+      dockerfile: dockerfile
+    container_name: catalog
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_URI=http://shop-eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - ZIPKIN_URI=http://zipkin:9411/api/v2/spans
+    networks:
+      - shopnet
+    depends_on:
+      - shop-eureka-server
+      - config-server
+      - zipkin
+  shop-eureka-server:
+    build:
+      context: ./ShopEurekaServer
+      dockerfile: dockerfile
+    container_name: shop-eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - shopnet
+  config-server:
+    build:
+      context: ./ConfigurationServer
+      dockerfile: dockerfile
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - shopnet
+    depends_on:
+      - shop-eureka-server
+  shop-gateway:
+    build:
+      context: ./ShopGateway
+      dockerfile: dockerfile
+    container_name: shop-gateway
+    ports:
+      - "9999:9999"
+    environment:
+      - EUREKA_URI=http://shop-eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - ZIPKIN_URI=http://zipkin:9411/api/v2/spans
+    networks:
+      - shopnet
+    depends_on:
+      - shop-eureka-server
+      - config-server
+      - zipkin
+  purchase:
+    build:
+      context: ./Purchases
+      dockerfile: dockerfile
+    container_name: purchase
+    ports:
+      - "7500:7500"
+    environment:
+      - EUREKA_URI=http://shop-eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - ZIPKIN_URI=http://zipkin:9411/api/v2/spans
+    networks:
+      - shopnet
+    depends_on:
+      - shop-eureka-server
+      - config-server
+      - zipkin
+  payment:
+    build:
+      context: ./Payment
+      dockerfile: dockerfile
+    container_name: payment
+    ports:
+      - "8900:8900"
+    environment:
+      - EUREKA_URI=http://shop-eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - ZIPKIN_URI=http://zipkin:9411/api/v2/spans
+    networks:
+      - shopnet
+    depends_on:
+      - shop-eureka-server
+      - config-server
+      - zipkin
+  usermanager:
+    build:
+      context: ./usermanager
+      dockerfile: dockerfile
+    container_name: usersmanager
+    ports:
+      - "8998:8998"
+    environment:
+      - EUREKA_URI=http://shop-eureka-server:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - ZIPKIN_URI=http://zipkin:9411/api/v2/spans
+    networks:
+      - shopnet
+    depends_on:
+      - shop-eureka-server
+      - config-server
+      - zipkin
+    
+  zipkin:
+    build:
+      context: ./zipkin
+      dockerfile: dockerfile
+    container_name: zipkin
+    ports: 
+      - "9411:9411"
+    networks:
+      - shopnet
+      
+networks:
+  shopnet:
+    driver: bridge

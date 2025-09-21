@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+.containerComponent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  background-image: radial-gradient(circle at 150%, #9ed1ec,#C7CEFF, #FEC5E5);
+
+  .contentLogin, .contentRegister{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    border-radius: 25px;
+    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.719);
+    padding: 30px 50px 35px 50px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.192);
+    outline: 1px solid rgba(255, 255, 255, 0.192);
+
+    transform: scale(1.1);
+
+
+    backdrop-filter: blur(5px);
+    h1, h3, p{
+      color: #46495a;
+      width: 100%;
+    }
+
+    .inputs{
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+
+      .inputIcon, .inputIconPassword{
+        position: relative;
+        svg{
+          position: absolute;
+          top: 25%;
+          left: 10px;
+
+          path{
+            fill: #C7CEFF;
+          }
+        }
+
+        input{
+          padding: 10px;
+          width: 250px;
+          border: none;
+          border-radius: 15px;
+          text-indent: 35px;
+          transition: 0.5s ease;
+          &:focus-visible, &:focus{
+            outline: none;
+            outline: 1px solid rgba(255, 235, 121, 0.336);
+            box-shadow: 0px 0px 10px rgba(255, 235, 121, 0.336);
+          }
+          &::placeholder{
+            color: #C7CEFF;
+          }
+        }
+      }
+      .inputIconPassword{
+        svg{
+          position: absolute;
+          top: 23%;
+          left: 10px;
+        }
+        button{
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          top: 18%;
+          left: 85%;
+          background-color: transparent;
+          border: none;
+
+          border-radius: 100%;
+          transition: 1s ease;
+          .eye{
+            position: absolute;
+            top: 0%;
+            left: 2%;
+          }
+
+          &:hover{
+            background-color: #C7CEFF;
+            cursor: pointer;
+            .eye{
+              path{
+                fill: #ffffff;
+              }
+            }
+          }
+        }
+      }
+    }
+    .btnLogin{
+      border: none;
+      border-radius: 25px;
+      background-image: radial-gradient(circle at 150% -210%, #9ed1ec,#C7CEFF, #FEC5E5);
+      width: 100%;
+      font-weight: bolder;
+      color: white;
+      font-size: 1.2rem;
+      margin-top: 15px;
+      padding: 15px 0 15px 0px;
+      margin-bottom: 15px;
+    }
+    .btnLogin {
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #FF9671, #FF6F91);
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btnLogin:hover{
+      background: linear-gradient(to right, #FF7F50, #FF4F7A);
+      transform: scale(1.05);
+    }
+  }
+}

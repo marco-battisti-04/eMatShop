@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: config-server-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: config-server-service
+    spec:
+      containers:
+        - name: configserver
+          image: configserver:1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8888
+              name: confserverport
