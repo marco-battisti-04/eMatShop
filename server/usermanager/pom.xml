@@ -74,6 +74,12 @@
             <artifactId>brave-instrumentation-mongodb</artifactId>
         </dependency>
 
+        <!-- Springboot secutiry -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- <https://mvnrepository.com/artifact/io.github.openfeign/feign-micrometer> -->
         <dependency>
             <groupId>io.github.openfeign</groupId>
