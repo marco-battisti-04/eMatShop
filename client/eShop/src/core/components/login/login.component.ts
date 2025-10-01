@@ -1,4 +1,6 @@
-import { Component, computed, signal, Signal } from '@angular/core';
+import { Component, computed, inject, signal, Type } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/userService/userService.service';
 
 @Component({
   selector: 'app-login',
@@ -6,12 +8,23 @@ import { Component, computed, signal, Signal } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent{
 
   passwordVisible : boolean = false;
-  loginRegister : boolean = true;
+  readonly #loginRegister = signal<boolean>(true);
+  loginRegisterComp = computed<boolean>(() => this.#loginRegister());
+
+  #URL = inject(ActivatedRoute)
+  #ROUTER = inject(Router)
+  #service = inject(UserService)
 
   visibility :string = "notVisible";
+
+  ngOnInit(){
+    this.#URL.fragment.subscribe(f => {
+      f == "login" || f == "register" ? f == "login" ? this.#loginRegister.set(false) : this.#loginRegister.set(true) : this.#ROUTER.navigate([""])
+    });
+  }
 
   public visibilityActionIcons : any = {
     "visible":{
@@ -32,6 +45,19 @@ export class LoginComponent {
     }else{
       this.visibility = "notVisible"
     }
+  }
+
+  email : string = ""
+  name : string = ""
+  surname : string = ""
+  pwd : string = ""
+  confirmPwd : string = ""
+
+  public register(){
+    if(this.pwd!=this.confirmPwd && this.pwd.trim() != "")
+      return
+
+    this.#service.register(this.email,this.name,this.surname,this.pwd)
   }
 
 }

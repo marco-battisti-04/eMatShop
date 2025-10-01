@@ -9,14 +9,21 @@ export class UserService {
   readonly #userID= signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
-  readonly #uri : string = "";
+  readonly #uri : string = "http://10.36.28.31:9999/";
 
   readonly #http = inject(HttpClient);
 
   constructor() {}
 
-  public register(email:string, nome:string, cognome:string, password:string) : UserResponseRegister{
-
+  public register(email:string, name:string, surname:string, password:string) : UserResponseRegister{
+    this.#http.post(this.#uri+"/user/register", {
+      email,
+      name,
+      surname,
+      password
+    }).subscribe(resp=>{
+      console.log(resp)
+    })
     try {
       //prova a registrarti
     } catch (e) {
@@ -26,8 +33,8 @@ export class UserService {
     //nel caso funzioni restituisci la roba del register
     return {
       userId:"",
-      nome:"",
-      cognome:"",
+      name:"",
+      surname:"",
       email:""
     }
   }

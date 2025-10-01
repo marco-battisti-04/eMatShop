@@ -1,5 +1,5 @@
 <div class="containerComponent">
-  @if(!this.loginRegister){
+  @if(!this.loginRegisterComp()){
   <div class="contentLogin">
     <h1>eMatShop</h1>
     <h3>Login</h3>
@@ -89,7 +89,7 @@
       </div>
     </div>
     <p>Password dimenticata?</p>
-    <button class="btnLogin">Registrati</button>
+    <button class="btnLogin" (click)="register()">Registrati</button>
     <p>Hai già un account? &ThinSpace; <a href="">Accedi</a></p>
   </div>
   }

@@ -1,14 +1,14 @@
 export interface UserResponseRegister{
   userId: string;
   email: string;
-  nome: string;
-  cognome: string;
+  name: string;
+  surname: string;
 }
 
 export interface UserRequestRegister{
   email: string;
-  nome: string;
-  cognome: string;
+  name: string;
+  surname: string;
   password: string;
 }
 
