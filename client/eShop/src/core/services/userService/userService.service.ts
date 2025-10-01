@@ -15,8 +15,15 @@ export class UserService {
 
   constructor() {}
 
-  public register(email:string, nome:string, cognome:string, password:string) : UserResponseRegister{
-
+  public register(email:string, name:string, surname:string, password:string) : UserResponseRegister{
+    this.#http.post(this.#uri+"/register", {
+      email,
+      name,
+      surname,
+      password
+    }).subscribe(resp=>{
+      console.log(resp)
+    })
     try {
       //prova a registrarti
     } catch (e) {
@@ -26,8 +33,8 @@ export class UserService {
     //nel caso funzioni restituisci la roba del register
     return {
       userId:"",
-      nome:"",
-      cognome:"",
+      name:"",
+      surname:"",
       email:""
     }
   }

@@ -1,4 +1,5 @@
-import { Component, computed, signal, Signal } from '@angular/core';
+import { Component, computed, inject, signal, Type } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -6,12 +7,22 @@ import { Component, computed, signal, Signal } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent{
 
   passwordVisible : boolean = false;
-  loginRegister : boolean = true;
+  readonly #loginRegister = signal<boolean>(true);
+  loginRegisterComp = computed<boolean>(() => this.#loginRegister());
+
+  #URL = inject(ActivatedRoute)
+  #ROUTER = inject(Router)
 
   visibility :string = "notVisible";
+
+  ngOnInit(){
+    this.#URL.fragment.subscribe(f => {
+      f == "login" || f == "register" ? f == "login" ? this.#loginRegister.set(false) : this.#loginRegister.set(true) : this.#ROUTER.navigate([""])
+    });
+  }
 
   public visibilityActionIcons : any = {
     "visible":{
