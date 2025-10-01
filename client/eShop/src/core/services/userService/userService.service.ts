@@ -9,14 +9,14 @@ export class UserService {
   readonly #userID= signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
-  readonly #uri : string = "";
+  readonly #uri : string = "http://10.36.28.31:9999/";
 
   readonly #http = inject(HttpClient);
 
   constructor() {}
 
   public register(email:string, name:string, surname:string, password:string) : UserResponseRegister{
-    this.#http.post(this.#uri+"/register", {
+    this.#http.post(this.#uri+"/user/register", {
       email,
       name,
       surname,
