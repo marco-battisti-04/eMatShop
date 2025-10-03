@@ -18,6 +18,7 @@ export class ProductCardBriefComponent {
   #router = inject(Router)
 
   ngOnInit(){
+    
   }
   details() {
     this.#router.navigate(['/details'])
