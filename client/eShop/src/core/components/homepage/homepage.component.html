@@ -1,3 +1,36 @@
-<div class="containerComponents">
-  
+<div class="containerComponents" style="font-family: 'Segoe UI', Arial, sans-serif; background: #fafbfc; min-height: 100vh;">
+
+  <!-- Header -->
+  <header style="display: flex;  align-items: center; padding: 24px 0 16px 0;">
+    <div style="display: flex; align-items: center;">
+      <img src="https://via.placeholder.com/40x40?text=EM" alt="eMatShop Logo" style="border-radius: 8px; margin-right: 12px;">
+      <span style="font-size: 2rem; font-weight: 700; color: #2d3748;">eMatShop</span>
+    </div>
+    <form style="display: flex; align-items: center; width: 100%;">
+      <input type="text" placeholder="Search products..." style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px 0 0 6px; outline: none; width: 100%;">
+      <button type="submit" style="padding: 8px 16px; border: none; background: #3182ce; color: #fff; border-radius: 0 6px 6px 0; cursor: pointer;">Search</button>
+    </form>
+  </header>
+
+  <!-- Central Welcome Section -->
+  <section style="text-align: center; margin: 40px 0 32px 0;">
+    <h1 style="font-size: 2.5rem; font-weight: 800; color: #2b6cb0; margin-bottom: 0;">Welcome to eMatShop</h1>
+  </section>
+
+  <!-- Products Grid -->
+  <section>
+
+
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; padding: 0 8px 40px 8px;">
+      <!-- Product Card 1 -->
+       @for(item of items; track item.name){
+
+       }
+      <app-product-card-brief [idProduct]="1"></app-product-card-brief>
+
+      <!-- Add more product cards as needed -->
+    </div>
+  </section>
+
 </div>

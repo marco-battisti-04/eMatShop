@@ -29,7 +29,7 @@
     </div>
     <p>Password dimenticata?</p>
     <button class="btnLogin">Login</button>
-    <p>Non hai un account? &ThinSpace; <a href="">Registrati</a></p>
+    <p>Non hai un account? &ThinSpace; <a [routerLink]="'/access'" fragment="register">Registrati</a></p>
   </div>
   }
   @else{
@@ -90,7 +90,7 @@
     </div>
     <p>Password dimenticata?</p>
     <button class="btnLogin" (click)="register()">Registrati</button>
-    <p>Hai già un account? &ThinSpace; <a href="">Accedi</a></p>
+    <p>Hai già un account? &ThinSpace; <a  [routerLink]="'/access'" fragment="login">Accedi</a></p>
   </div>
   }
 
