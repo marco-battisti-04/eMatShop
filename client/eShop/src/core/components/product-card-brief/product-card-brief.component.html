@@ -1,6 +1,6 @@
-<div style="background: #fff; border-radius: 10px; box-shadow: 0 2px 8px #e2e8f0; padding: 18px; display: flex; flex-direction: column; align-items: center;">
-  <img src="https://via.placeholder.com/150x150?text=Product+1" alt="Product 1" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 14px;">
-  <h2 style="font-size: 1.1rem; font-weight: 600; margin: 0 0 6px 0;">Wireless Headphones</h2>
-  <p style="font-size: 0.97rem; color: #4a5568; margin: 0 0 10px 0; text-align: center;">High quality wireless headphones with noise cancellation.</p>
-  <span style="font-size: 1.1rem; font-weight: 700; color: #3182ce;">€59.99</span>
+<div style="background: #fff; border-radius: 10px; box-shadow: 0 2px 8px #e2e8f0; padding: 18px; display: flex; flex-direction: column; align-items: center;" (click)="details()">
+  <img src="{{idProduct().image}}" alt="{{idProduct().id}}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 14px;">
+  <h2 style="font-size: 1.1rem; font-weight: 600; margin: 0 0 6px 0;">{{idProduct().title}}</h2>
+  <p style="font-size: 0.97rem; color: #4a5568; margin: 0 0 10px 0; text-align: center;">{{idProduct().description}}</p>
+  <span style="font-size: 1.1rem; font-weight: 700; color: #3182ce;">€{{idProduct().price}}</span>
 </div>

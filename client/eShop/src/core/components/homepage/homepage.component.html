@@ -24,10 +24,9 @@
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; padding: 0 8px 40px 8px;">
       <!-- Product Card 1 -->
-       @for(item of items; track item.name){
-
+       @for(item of service.productListComp(); track $index){
+         <app-product-card-brief [idProduct]="item"></app-product-card-brief>
        }
-      <app-product-card-brief [idProduct]="1"></app-product-card-brief>
 
       <!-- Add more product cards as needed -->
     </div>
