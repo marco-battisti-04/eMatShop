@@ -14,7 +14,7 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'details',
+    path:'details/:index',
     component: ProductCardCompleteComponent
   }
 ];

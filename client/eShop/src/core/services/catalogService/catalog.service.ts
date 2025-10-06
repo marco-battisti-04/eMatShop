@@ -21,11 +21,11 @@ export class CatalogService {
    * get product
   */
   public getProducts() {
-    this.#http.get(/*`${this.#uri}catalog`*/"https://fakestoreapi.com/products").subscribe((res) => {
-      this.#productList.set(res as [])
+    this.#http.get(/*`${this.#uri}catalog`*/"https://fakestoreapi.com/products").subscribe(async (res) => {
+      await this.#productList.set(res as [])
     })
   }
-  public getProductByID(idProduct: any) {
-    return this.#productList().find(p => p.id === idProduct)
+  public getProductByID(idProduct: number) {
+    return this.#productList().find(async p => await p.id == idProduct)[0]
   }
 }

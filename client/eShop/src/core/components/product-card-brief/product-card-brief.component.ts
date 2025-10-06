@@ -18,9 +18,9 @@ export class ProductCardBriefComponent {
   #router = inject(Router)
 
   ngOnInit(){
-    
+
   }
   details() {
-    this.#router.navigate(['/details'])
+    this.#router.navigate(['/details/'+this.idProduct().id])
   }
 }

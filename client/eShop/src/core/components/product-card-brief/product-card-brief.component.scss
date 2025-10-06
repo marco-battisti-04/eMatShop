@@ -7,10 +7,17 @@ img::hover{
 }
 p{
   overflow:hidden;
-  max-height: 100px;
-  width: 100%;
-  text-align: left;
-  text-overflow: ellipsis;
+  font-size: 15.52px;
+  line-height: 1.2; /* ≈ 18.62px */
+  width: 325px;
 
-  display:inline-block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;     /* max 3 righe */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+div{
+  justify-content: space-between;
+  cursor: pointer;
 }
