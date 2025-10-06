@@ -71,14 +71,30 @@
         <!-- MongoDB Tracing support (per TracingCommandListener) -->
         <dependency>
             <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-instrumentation-mongodb</artifactId>
+            <artifactId>brave-instrumentation-mongodb</artifactId>  
         </dependency>
 
         <!-- Springboot secutiry -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency> -->
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+        </dependency>
 
         <!-- <https://mvnrepository.com/artifact/io.github.openfeign/feign-micrometer> -->
         <dependency>

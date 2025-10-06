@@ -17,14 +17,33 @@ import org.springframework.http.ResponseEntity;
 import it.outdoor.usermanager.models.User;
 import it.outdoor.usermanager.models.UserDTO;
 
+import it.outdoor.usermanager.models.dtos.LoginUserDto;
+import it.outdoor.usermanager.models.dtos.RegisterUserDto;
+import it.outdoor.usermanager.repositories.UserRepository;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import it.outdoor.usermanager.services.AuthenticationService;
+import it.outdoor.usermanager.services.JwtService;
+import it.outdoor.usermanager.responses.LoginResponse;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
 
-    private final UserService userService;
+    // private final UserService userService;
+    private final JwtService jwtService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    private final AuthenticationService authenticationService;
+
+    public UserController(JwtService jwtService, AuthenticationService authenticationService) {//, UserService userService) {
+        // this.userService = userService;
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
     }
 
 
@@ -53,15 +72,31 @@ public class UserController {
      */
     // @PostMapping("/register")
     @PostMapping("/register")
-    public UserDTO register(@RequestBody UserDTO userDTO) {
-        return userService.createUser(userDTO);
+    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+
+        User registeredUser = authenticationService.signup(registerUserDto);
+
+        return ResponseEntity.ok(registeredUser);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+        Optional<User> authenticatedUser = authenticationService.authenticate(loginUserDto);
+
+        User user = authenticatedUser.orElseThrow();
+        String jwtToken = jwtService.generateToken(user);
+
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(jwtToken);
+        loginResponse.setExpiresIn(jwtService.getExpirationTime());
+
+        return ResponseEntity.ok(loginResponse);
     }
 
 
-    // @PostMapping("/login")
     // public String login(@RequestBody requestBody) {
 
-        
+
 
     //     return "";
 
