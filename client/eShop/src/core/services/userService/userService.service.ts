@@ -1,6 +1,7 @@
 import { Injectable, signal, inject, computed } from '@angular/core';
 import { UserResponseLogin, UserResponseRegister } from '../../model/user.model';
 import { HttpClient } from '@angular/common/http';
+import { catchError, of, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,15 @@ export class UserService {
       name,
       surname,
       password
-    }).subscribe(resp=>{
+    })
+    .pipe(
+      retry(3),
+      catchError((err) => {
+        console.error(err);
+        return of(null);
+      }),
+    )
+    .subscribe(resp=>{
       console.log(resp)
     })
     try {

@@ -25,7 +25,11 @@ export class ProductCardCompleteComponent {
     let tmp;
     this.#service.productListComp().forEach((element, index) => {
 
-      this.#router.snapshot.params['index']
+      if(this.#router.snapshot.params['index'] == index+1){
+        tmp = element
+        console.log(tmp)
+        return;
+      }
     });
     // this.#prodotto.set()
     this.#prodotto.set(tmp)

@@ -10,41 +10,43 @@ import {
   Injector,
   NgModule,
   NgZone,
-  Observable,
   PLATFORM_ID,
   PendingTasksInternal,
   ResourceImpl,
   ResourceStatus,
   RuntimeError,
   TransferState,
-  __async,
-  __objRest,
-  __spreadValues,
   assertInInjectionContext,
   computed,
-  concatMap,
-  filter,
-  finalize,
   formatRuntimeError,
-  from,
   inject,
   linkedSignal,
   makeEnvironmentProviders,
   makeStateKey,
-  map,
-  of,
   performanceMarkFeature,
   runInInjectionContext,
   setClassMetadata,
   signal,
-  switchMap,
-  tap,
   truncateMiddle,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-5T6PAE7P.js";
+} from "./chunk-OLJ2W2BP.js";
+import {
+  Observable,
+  __async,
+  __objRest,
+  __spreadValues,
+  concatMap,
+  filter,
+  finalize,
+  from,
+  map,
+  of,
+  switchMap,
+  tap
+} from "./chunk-S35MAB2V.js";
 
 // node_modules/@angular/common/fesm2022/xhr-BfNfxNDv.mjs
 function parseCookieValue(cookieStr, name) {
@@ -2534,12 +2536,12 @@ function appendMissingHeadersDetection(url, headers, headersToInclude) {
 }
 
 export {
+  DOCUMENT,
   parseCookieValue,
   PLATFORM_BROWSER_ID,
   isPlatformBrowser,
   isPlatformServer,
   XhrFactory,
-  DOCUMENT,
   HttpHandler,
   HttpBackend,
   HttpHeaders,
@@ -2592,4 +2594,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-LZ52C6LW.js.map
+//# sourceMappingURL=chunk-AJMCMX7S.js.map
