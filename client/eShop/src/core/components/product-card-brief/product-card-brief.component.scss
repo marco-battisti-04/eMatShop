@@ -1,0 +1,23 @@
+img{
+  transform: scale(1);
+
+}
+img::hover{
+  transform: scale(1.2);
+}
+p{
+  overflow:hidden;
+  font-size: 15.52px;
+  line-height: 1.2; /* ≈ 18.62px */
+  width: 325px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;     /* max 3 righe */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+div{
+  justify-content: space-between;
+  cursor: pointer;
+}
