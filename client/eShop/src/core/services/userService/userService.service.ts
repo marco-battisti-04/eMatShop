@@ -10,7 +10,7 @@ export class UserService {
   readonly #userID = signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
-  readonly #uri: string = "http://10.36.28.31:9999/";
+  readonly #uri: string = "http://localhost:9999/";
 
   readonly #http = inject(HttpClient);
 
@@ -23,16 +23,16 @@ export class UserService {
       "surname": surname,
       "password": password
     })
-      .pipe(
-        retry(3),
-        catchError((err) => {
-          console.error(err);
-          return of(null);
-        }),
-      )
-      .subscribe(resp => {
-        console.log(resp)
-      })
+    // .pipe(
+    //   retry(3),
+    //   catchError((err) => {
+    //     console.error(err);
+    //     return of(null);
+    //   }),
+    // )
+    .subscribe(resp => {
+      console.log(resp)
+    })
     try {
       //prova a registrarti
     } catch (e) {
@@ -50,13 +50,13 @@ export class UserService {
 
   public login(email: string, password: string): UserResponseLogin {
 
-    this.#http.post(this.#uri + "user/login", {
-      "email": email,
-      "password": password
+    this.#http.post<UserResponseLogin>(this.#uri + "user/login", {
+      email,
+      password
     })
     .subscribe(resp => {
-      console.log(resp)
-    })
+      console.log(resp);
+    });
 
     //nel caso funzioni restituisci la roba del register
     return {
