@@ -1,6 +1,7 @@
 package it.smartcommunitylabdhub.shopgateway;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fallback")
 public class FallbackController {
 
+
     @GetMapping("/catalog")
+    @CrossOrigin
     public ResponseEntity<String> catalogFallback() {
         return ResponseEntity
                 .status(503)
@@ -17,6 +20,7 @@ public class FallbackController {
     }
 
     @GetMapping("/purchase")
+    @CrossOrigin
     public ResponseEntity<String> purchaseFallback() {
         return ResponseEntity
                 .status(503)
@@ -24,6 +28,7 @@ public class FallbackController {
     }
 
     @GetMapping("/cart")
+    @CrossOrigin
     public ResponseEntity<String> cartFallback() {
         return ResponseEntity
                 .status(503)
@@ -31,6 +36,7 @@ public class FallbackController {
     }
 
     @GetMapping("/user")
+    @CrossOrigin
     public ResponseEntity<String> userFallback() {
         return ResponseEntity
                 .status(503)

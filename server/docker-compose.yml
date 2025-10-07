@@ -108,6 +108,18 @@ services:
       - config-server
       - zipkin
     
+# spring:
+#   cloud:
+#     gateway:
+#     default-filters:
+#        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+#   globalcors:
+#     corsConfigurations:
+#       '[/**]':
+#         allowedOrigins: "http://localhost:<your port>"
+#         allowedHeaders: "*"
+#         allowedMethods: "*"
+
   zipkin:
     build:
       context: ./zipkin
