@@ -42,3 +42,5 @@ testem.log
 Thumbs.db
 
 .vscode/settings.json
+client/eShop/.angular/cache/**
+**/.angular/cache/

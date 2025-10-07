@@ -7,32 +7,32 @@ import { catchError, of, retry } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  readonly #userID= signal<string>("");
+  readonly #userID = signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
-  readonly #uri : string = "http://10.36.28.31:9999/";
+  readonly #uri: string = "http://10.36.28.31:9999/";
 
   readonly #http = inject(HttpClient);
 
-  constructor() {}
+  constructor() { }
 
-  public register(email:string, name:string, surname:string, password:string) : UserResponseRegister{
-    this.#http.post(this.#uri+"user/register", {
-      email,
-      name,
-      surname,
-      password
+  public register(email: string, name: string, surname: string, password: string): UserResponseRegister {
+    this.#http.post(this.#uri + "user/register", {
+      "email": email,
+      "name": name,
+      "surname": surname,
+      "password": password
     })
-    .pipe(
-      retry(3),
-      catchError((err) => {
-        console.error(err);
-        return of(null);
-      }),
-    )
-    .subscribe(resp=>{
-      console.log(resp)
-    })
+      .pipe(
+        retry(3),
+        catchError((err) => {
+          console.error(err);
+          return of(null);
+        }),
+      )
+      .subscribe(resp => {
+        console.log(resp)
+      })
     try {
       //prova a registrarti
     } catch (e) {
@@ -41,24 +41,26 @@ export class UserService {
 
     //nel caso funzioni restituisci la roba del register
     return {
-      userId:"",
-      name:"",
-      surname:"",
-      email:""
+      userId: "",
+      name: "",
+      surname: "",
+      email: ""
     }
   }
 
-  public login(email:string, password:string) : UserResponseLogin{
+  public login(email: string, password: string): UserResponseLogin {
 
-    try {
-      //prova a registrarti
-    } catch (e) {
-      // riprova oppure altro
-    }
+    this.#http.post(this.#uri + "user/login", {
+      "email": email,
+      "password": password
+    })
+    .subscribe(resp => {
+      console.log(resp)
+    })
 
     //nel caso funzioni restituisci la roba del register
     return {
-      token:""
+      token: ""
     }
   }
 }

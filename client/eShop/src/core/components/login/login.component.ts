@@ -1,10 +1,11 @@
-import { Component, computed, inject, signal, Type } from '@angular/core';
+import { Component, computed, inject, Input, signal, model } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/userService/userService.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -47,17 +48,26 @@ export class LoginComponent{
     }
   }
 
-  email : string = ""
-  name : string = ""
-  surname : string = ""
-  pwd : string = ""
-  confirmPwd : string = ""
+  email = model<string>();
+  name = model<string>();
+  surname = model<string>();
+  pwd = model<string>();
+  confirmPwd = model<string>();
 
   public register(){
-    if(this.pwd!=this.confirmPwd && this.pwd.trim() != "")
+    if(this.pwd()==this.confirmPwd() || this.pwd()?.trim() == "")
       return
 
-    this.#service.register(this.email,this.name,this.surname,this.pwd)
+    this.#service.register(this.email()||"",this.name()||"",this.surname()||"",this.pwd()||"")
+  }
+
+  emailLogin = model<string>();
+  pwdLogin = model<string>();
+
+  public login(){
+    if(this.pwdLogin()?.trim() == "")
+      return
+    this.#service.login(this.emailLogin()||"",this.pwdLogin()||"")
   }
 
 }
