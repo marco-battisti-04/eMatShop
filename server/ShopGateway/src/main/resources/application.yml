@@ -14,7 +14,38 @@ spring:
   #          allowedOrigins: "*"
   #          allowedMethods: "*"
   #          allowedHeaders: "*"
-
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://10.30.206.249:4200"
+            allowedHeaders:
+              - "Origin"
+              - "Content-Type"
+              - "Accept"
+              - "Authorization"
+              - "Referer"
+            allowedMethods:
+              - POST
+              - GET
+              - OPTIONS
+      routes:
+        - id: Customer Login
+          uri: http://localhost:8998
+          predicates:
+            - Path=/api/user/login
+        - id: Customer Registration
+          uri: http://localhost:8998
+          predicates:
+            - Path=/api/user/register
+        - id: Catalog
+          uri: http://localhost:8082
+          predicates:
+            - Path=/catalog
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
 
 eureka:
   instance:

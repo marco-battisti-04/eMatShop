@@ -66,15 +66,15 @@ public class CorsConfig {
 
         // Specify the list of allowed origins that can access the application
         // Your front-end URLs only
-        config.setAllowedOrigins(Arrays.asList("http://10.36.28.137:4200"));
+        config.setAllowedOrigins(Arrays.asList("http://10.30.206.249:4200"));
 
         // Allow Standard headers
         config.setAllowedHeaders(Arrays.asList("Authorization", // Authorization → for tokens (JWT, OAuth, etc.)
-                "Cache-Control", // Cache-Control → browser cache behavior
-                "Content-Type", // Content-Type → like application/json
-                "X-Requested-With", // X-Requested-With → for Ajax requests (especially legacy)
-                "Accept", // Accept → what response formats are acceptable (application/json, etc.)
-                "Origin" // Origin → original domain of request (used internally)
+            "Cache-Control", // Cache-Control → browser cache behavior
+            "Content-Type", // Content-Type → like application/json
+            "X-Requested-With", // X-Requested-With → for Ajax requests (especially legacy)
+            "Accept", // Accept → what response formats are acceptable (application/json, etc.)
+            "Origin" // Origin → original domain of request (used internally)
         ));
 
         // Specify the HTTP methods that are allowed

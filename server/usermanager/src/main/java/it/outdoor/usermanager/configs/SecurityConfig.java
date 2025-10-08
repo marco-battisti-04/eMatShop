@@ -24,7 +24,9 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/api/user/register",
                     "/api/user/login",
-                    "/api/user/working"
+                    "/api/user/working",
+                    "/user/register",
+                    "/user/login"
                 ).permitAll()
                 .requestMatchers("/api/user/**").authenticated()
                 .anyRequest().authenticated()
@@ -44,9 +46,10 @@ public class SecurityConfig {
         // configuration.setAllowCredentials(true);
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://10.30.206.249:4200"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

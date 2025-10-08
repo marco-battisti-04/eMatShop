@@ -18,7 +18,6 @@ public class GatewayConfig {
 		return builder.routes()
 				.route("catalog_root", r -> r
 						.path("/catalog")
-
 						.filters(f -> f
 								.circuitBreaker(config -> config
 										.setName("catalog")
