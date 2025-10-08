@@ -55,7 +55,7 @@ export class LoginComponent{
   confirmPwd = model<string>();
 
   public register(){
-    if(this.pwd()==this.confirmPwd() || this.pwd()?.trim() == "")
+    if(this.pwd()!=this.confirmPwd() || this.pwd()?.trim() == "")
       return
 
     this.#service.register(this.email()||"",this.name()||"",this.surname()||"",this.pwd()||"")

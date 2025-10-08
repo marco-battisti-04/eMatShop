@@ -12,7 +12,6 @@ export class CatalogService {
   readonly #productList = signal<any[]>([]) //da aggiungere che sia un interfaccia prodotto
   readonly productListComp = computed<any[]>(()=>this.#productList()) //da aggiungere che sia un interfaccia prodotto
 
-
   constructor() {
     this.getProducts()
   }
@@ -21,7 +20,7 @@ export class CatalogService {
    * get product
   */
   public getProducts() {
-    this.#http.get(/*`${this.#uri}catalog`*/"https://fakestoreapi.com/products").subscribe(async (res) => {
+    this.#http.get(/*`${this.#uri}catalog`*/ "http://10.30.206.249:9999/catalog").subscribe(async (res) => {
       await this.#productList.set(res as [])
     })
   }

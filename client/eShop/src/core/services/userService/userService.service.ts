@@ -10,7 +10,7 @@ export class UserService {
   readonly #userID = signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
-  readonly #uri: string = "http://localhost:9999/";
+  readonly #uri: string = "http://10.30.206.249:9999/";
 
   readonly #http = inject(HttpClient);
 
