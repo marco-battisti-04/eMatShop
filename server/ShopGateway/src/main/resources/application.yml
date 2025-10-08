@@ -3,16 +3,17 @@ spring:
     baseUrl: ${ZIPKIN_URI:http://localhost:9411/api/v2/spans}
   application:
     name: shop-gateway
-  cloud:
-    gateway:
-      default-filters:
-      - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-      globalcors:
-        cors-configurations:
-          '[/**]':
-           allowedOrigins: "*"
-           allowedMethods: "*"
-           allowedHeaders: "*"
+
+  # cloud:
+  #   gateway:
+  #     default-filters:
+  #     - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+  #     globalcors:
+  #       cors-configurations:
+  #         '[/**]':
+  #          allowedOrigins: "*"
+  #          allowedMethods: "*"
+  #          allowedHeaders: "*"
 
 
 eureka:

@@ -107,7 +107,7 @@ services:
       - shop-eureka-server
       - config-server
       - zipkin
-    
+  
 # spring:
 #   cloud:
 #     gateway:
