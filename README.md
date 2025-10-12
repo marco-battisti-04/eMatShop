@@ -47,3 +47,25 @@ Eureka Server	    --> `docker compose build eurekaserver`
 Zipkin              -->	`docker compose build zipkin`
 
 usermanager         --> `docker compose build usermanager`
+
+
+MICROSERVIZI FOR DUMMIES:
+
+1. L’inizio: la richiesta dal client
+
+Tutto parte da un client (un browser, un’app, o un altro servizio) che fa una richiesta HTTP get.
+
+2. API Gateway
+
+Il gateway è la porta d’ingresso unica per tutte le richieste esterne.
+È come un centralino: riceve la chiamata e decide a quale microservizio inoltrarla.
+
+3. Il microservizio Catalog
+
+Si suddivide in diversi passaggi: Controller, Service e Repository.
+
+- Il controller è il punto di ingresso della richiesta all’interno del microservizio.
+È la classe che espone le API.
+- Il service decide come ottenere i dati (es. ordinarli, filtrarli).
+- Repository serve per contattare il DB.
+
