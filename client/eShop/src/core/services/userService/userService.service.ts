@@ -10,7 +10,7 @@ export class UserService {
   readonly #userID = signal<string>("");
   readonly userIDComp = computed(() => this.#userID());
 
-  readonly #uri: string = "http://10.30.206.249:9999/";
+  readonly #uri: string = "http://192.168.1.19:9999/";
 
   readonly #http = inject(HttpClient);
 
@@ -22,6 +22,11 @@ export class UserService {
       "name": name,
       "surname": surname,
       "password": password
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: false  // solo se il backend usa i cookie/sessione
     })
     // .pipe(
     //   retry(3),
