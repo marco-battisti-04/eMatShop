@@ -30,10 +30,12 @@ package it.smartcommunitylabdhub.shopgateway.configs;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -56,38 +58,17 @@ public class CorsConfig {
      * @return CorsFilter that applies CORS rules to all incoming HTTP requests
      */
     @Bean
-    public CorsFilter corsFilter() {
-        // Create a new CorsConfiguration object
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Allow credentials like cookies, authorization headers, or TLS client
-        // certificates
-        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("http://192.168.1.19:4200"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Content-Type", "Authorization"));
+        config.setAllowCredentials(true); // se usi cookie o autenticazione via sessione
 
-        // Specify the list of allowed origins that can access the application
-        // Your front-end URLs only
-        config.setAllowedOrigins(Arrays.asList("http://10.30.206.249:4200"));
-
-        // Allow Standard headers
-        config.setAllowedHeaders(Arrays.asList("Authorization", // Authorization → for tokens (JWT, OAuth, etc.)
-            "Cache-Control", // Cache-Control → browser cache behavior
-            "Content-Type", // Content-Type → like application/json
-            "X-Requested-With", // X-Requested-With → for Ajax requests (especially legacy)
-            "Accept", // Accept → what response formats are acceptable (application/json, etc.)
-            "Origin" // Origin → original domain of request (used internally)
-        ));
-
-        // Specify the HTTP methods that are allowed
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"));
-
-        // Create a source that maps URL patterns to CORS configurations
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-        // Register the CORS configuration to apply to all paths (/** means all
-        // endpoints)
         source.registerCorsConfiguration("/**", config);
 
-        // Return the CorsFilter with the configured source
-        return new CorsFilter(source);
+        return source;
     }
 }
