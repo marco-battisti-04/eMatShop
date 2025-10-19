@@ -7,8 +7,10 @@ import { catchError, of, retry } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  readonly #userID = signal<string>("");
-  readonly userIDComp = computed(() => this.#userID());
+  readonly #user = signal<any>({
+    id:"",
+  });
+  readonly userComp = computed(() => this.#user());
 
   readonly #uri: string = "http://192.168.1.19:9999/";
 
@@ -28,13 +30,6 @@ export class UserService {
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
     })
-    // .pipe(
-    //   retry(3),
-    //   catchError((err) => {
-    //     console.error(err);
-    //     return of(null);
-    //   }),
-    // )
     .subscribe(resp => {
       console.log(resp)
     })
@@ -54,18 +49,20 @@ export class UserService {
   }
 
   public login(email: string, password: string): UserResponseLogin {
-
+    let tmp = ""
     this.#http.post<UserResponseLogin>(this.#uri + "user/login", {
       email,
       password
     })
     .subscribe(resp => {
-      console.log(resp);
+      localStorage.setItem("token", resp.token)
+      this.#user().email = email
+      tmp = resp.token
     });
 
     //nel caso funzioni restituisci la roba del register
     return {
-      token: ""
+      token: tmp
     }
   }
 }

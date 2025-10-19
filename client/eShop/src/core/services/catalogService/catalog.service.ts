@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,9 @@ export class CatalogService {
    * get product
   */
   public getProducts() {
-    this.#http.get(/*`${this.#uri}catalog`*/ "http://192.168.1.19:9999/catalog").subscribe(async (res) => {
+    this.#http.get(/*`${this.#uri}catalog`*/ "http://192.168.1.19:9999/catalog")
+    .pipe(retry(5))
+    .subscribe(async (res) => {
       await this.#productList.set(res as [])
     })
   }

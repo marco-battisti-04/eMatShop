@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogService } from '../../services/catalogService/catalog.service';
 
@@ -8,7 +8,7 @@ import { CatalogService } from '../../services/catalogService/catalog.service';
   templateUrl: './product-card-complete.component.html',
   styleUrl: './product-card-complete.component.scss'
 })
-export class ProductCardCompleteComponent {
+export class ProductCardCompleteComponent implements OnInit {
   #router = inject(ActivatedRoute)
   #routerNav = inject(Router)
   #service = inject(CatalogService)
@@ -24,14 +24,14 @@ export class ProductCardCompleteComponent {
       this.#routerNav.navigate([""])
     let tmp;
     this.#service.productListComp().forEach((element, index) => {
-
-      if(this.#router.snapshot.params['index'] == index+1){
+      if(this.#router.snapshot.params['index'] ==  element.id){
         tmp = element
-        console.log(tmp)
         return;
       }
     });
-    // this.#prodotto.set()
     this.#prodotto.set(tmp)
+  }
+  addToCart(){
+    
   }
 }
