@@ -9,4 +9,12 @@
     <h3>Your cart is Empty</h3>
   }
   <h4>Total Price: {{service.cartListComp().totalPrice}}</h4>
+  @if(true){
+    <input type="text" placeholder="card number" [(ngModel)]="cardNumber">
+    <input type="text" placeholder="cvv" [(ngModel)]="cvv">
+    <input type="date" placeholder="expiration date" [(ngModel)]="expirationDate">
+  }@else {
+    <h1>No payment</h1>
+  }
+  <button (click)="pay()">PAY CASH</button>
 </div>
