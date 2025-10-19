@@ -30,6 +30,7 @@ spring:
             allowedMethods:
               - POST
               - GET
+              - PUT
               - OPTIONS
       routes:
         - id: Customer Login
