@@ -44,6 +44,14 @@ spring:
           uri: http://192.168.1.19:8082
           predicates:
             - Path=/catalog
+        - id: AddToCart
+          uri: http://192.168.1.19:7500
+          predicates:
+            - Path=/carts/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/api/carts
+            
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
 

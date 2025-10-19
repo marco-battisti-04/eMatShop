@@ -107,15 +107,15 @@ services:
       - shop-eureka-server
       - config-server
       - zipkin
-  angular:
-    build:
-      context: ../client/eShop
-      dockerfile: dockerfile
-    container_name: angular
-    ports:
-      - "4200:4200"
-    networks:
-      - shopnet
+  # angular:
+  #   build:
+  #     context: ../client/eShop
+  #     dockerfile: dockerfile
+  #   container_name: angular
+  #   ports:
+  #     - "4200:4200"
+  #   networks:
+  #     - shopnet
 # spring:
 #   cloud:
 #     gateway:
