@@ -4,6 +4,13 @@ export interface UserResponseRegister{
   name: string;
   surname: string;
 }
+export interface UserInfo{
+  userId: string;
+  email: string;
+  name: string;
+  surname: string;
+  token: string;
+}
 
 export interface UserRequestRegister{
   email: string;

@@ -10,10 +10,10 @@ export class AuthGuard implements CanActivate{
   #router = inject(Router);
 
   canActivate() {
-    if(this.#service.userIDComp() != ""){
+    if(localStorage.getItem('token') != "" && localStorage.getItem('token')){
       return true;
     }
-    this.#router.navigate(['access'])
+    this.#router.navigate(['access'], {fragment:'login'})
     return false;
   }
 };

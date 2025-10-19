@@ -20,7 +20,7 @@ spring:
         add-to-simple-url-handler-mapping: true
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://10.30.206.249:4200"
+            allowedOrigins: "http://192.168.1.19:4200"
             allowedHeaders:
               - "Origin"
               - "Content-Type"
@@ -33,17 +33,25 @@ spring:
               - OPTIONS
       routes:
         - id: Customer Login
-          uri: http://localhost:8998
+          uri: http://192.168.1.19:8998
           predicates:
             - Path=/api/user/login
         - id: Customer Registration
-          uri: http://localhost:8998
+          uri: http://192.168.1.19:8998
           predicates:
             - Path=/api/user/register
         - id: Catalog
-          uri: http://localhost:8082
+          uri: http://192.168.1.19:8082
           predicates:
             - Path=/catalog
+        - id: AddToCart
+          uri: http://192.168.1.19:7500
+          predicates:
+            - Path=/carts/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/api/carts
+            
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
 

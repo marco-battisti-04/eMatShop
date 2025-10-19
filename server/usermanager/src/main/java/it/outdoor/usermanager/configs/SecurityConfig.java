@@ -17,9 +17,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // necessario per POST JSON
-            // .cors(cors -> cors.configurationSource(corsConfigurationSource())) // necessario se chiami da frontend
-            .cors(Customizer.withDefaults())
+            .csrf(csrf -> csrf.disable())
+            // .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <-- cambia qui
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/api/user/register",
@@ -37,25 +36,17 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        // CorsConfiguration configuration = new CorsConfiguration();
-        // configuration.setAllowedOriginPatterns(List.of("http://localhost:4200")); // per test
-        // configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        // configuration.setAllowedHeaders(List.of("*"));
-        // configuration.setAllowCredentials(true);
 
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://10.30.206.249:4200"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+    // @Bean
+    // public CorsConfigurationSource corsConfigurationSource() {
 
-        // UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        // source.registerCorsConfiguration("/**", configuration);
-        // return source;
-    }
+    //     CorsConfiguration configuration = new CorsConfiguration();
+    //     configuration.setAllowedOrigins(Arrays.asList("http://192.168.1.19:4200"));
+    //     configuration.setAllowedMethods(Arrays.asList("*"));
+    //     configuration.setAllowedHeaders(Arrays.asList("*"));
+    //     configuration.setAllowCredentials(true);
+    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //     source.registerCorsConfiguration("/**", configuration);
+    //     return source;
+    // }
 }

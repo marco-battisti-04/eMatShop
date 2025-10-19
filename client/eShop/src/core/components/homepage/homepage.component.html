@@ -6,6 +6,7 @@
       <img src="https://via.placeholder.com/40x40?text=EM" alt="eMatShop Logo" style="border-radius: 8px; margin-right: 12px;">
       <span style="font-size: 2rem; font-weight: 700; color: #2d3748;">eMatShop</span>
     </div>
+    <a [routerLink]="'/cart'">My Cart</a>
     <form style="display: flex; align-items: center; width: 100%;">
       <input type="text" placeholder="Search products..." style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px 0 0 6px; outline: none; width: 100%;">
       <button type="submit" style="padding: 8px 16px; border: none; background: #3182ce; color: #fff; border-radius: 0 6px 6px 0; cursor: pointer;">Search</button>
@@ -23,6 +24,9 @@
       <!-- Product Card 1 -->
        @for(item of service.productListComp(); track $index){
          <app-product-card-brief [idProduct]="item"></app-product-card-brief>
+       }
+       @empty {
+        <h1>Nah huh</h1>
        }
 
       <!-- Add more product cards as needed -->
