@@ -8,8 +8,8 @@ import { CartService } from '../../services/cartService/cart.service';
   styleUrl: './personal-cart.component.scss'
 })
 export class PersonalCartComponent {
-  #service = inject(CartService)
+  readonly service = inject(CartService)
   constructor(){
-    this.#service.addToCart()
+    this.service.getCart()
   }
 }

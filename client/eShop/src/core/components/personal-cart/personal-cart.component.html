@@ -1,1 +1,12 @@
-<p>personal-cart works!</p>
+<div>
+  <h1>My personal Cart</h1>
+  @for (item of service.cartListComp()?.items; track $index) {
+    <h2>{{item.product.title}}</h2>
+    <h4>Price:{{item.product.price}}</h4>
+    <h4>Quantity: {{item.quantity}}</h4>
+  }
+  @empty {
+    <h3>Your cart is Empty</h3>
+  }
+  <h4>Total Price: {{service.cartListComp().totalPrice}}</h4>
+</div>

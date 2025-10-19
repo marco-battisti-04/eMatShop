@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogService } from '../../services/catalogService/catalog.service';
+import { CartService } from '../../services/cartService/cart.service';
 
 @Component({
   selector: 'app-product-card-complete',
@@ -11,19 +12,20 @@ import { CatalogService } from '../../services/catalogService/catalog.service';
 export class ProductCardCompleteComponent implements OnInit {
   #router = inject(ActivatedRoute)
   #routerNav = inject(Router)
-  #service = inject(CatalogService)
+  #serviceCatalog = inject(CatalogService)
+  #serviceCart = inject(CartService)
   #prodotto = signal<any>({})
   prodottoComp = computed<any>(()=>this.#prodotto())
 
   constructor(){
-    this.#service.getProducts()
+    this.#serviceCatalog.getProducts()
   }
 
   ngOnInit(){
-    if(this.#service.productListComp().length==0)
+    if(this.#serviceCatalog.productListComp().length==0)
       this.#routerNav.navigate([""])
     let tmp;
-    this.#service.productListComp().forEach((element, index) => {
+    this.#serviceCatalog.productListComp().forEach((element, index) => {
       if(this.#router.snapshot.params['index'] ==  element.id){
         tmp = element
         return;
@@ -32,6 +34,6 @@ export class ProductCardCompleteComponent implements OnInit {
     this.#prodotto.set(tmp)
   }
   addToCart(){
-    
+    this.#serviceCart.addCart("68e3c8b1b2f3fa084a052fe4", this.#router.snapshot.params['index'], 1)
   }
 }
