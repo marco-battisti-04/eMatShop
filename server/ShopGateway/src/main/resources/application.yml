@@ -37,6 +37,10 @@ spring:
           uri: http://192.168.1.19:8998
           predicates:
             - Path=/api/user/login
+        - id: Pioppo
+          uri: http://192.168.1.19:8998
+          predicates:
+            - Path=/api/user/pioppo
         - id: Customer Registration
           uri: http://192.168.1.19:8998
           predicates:
@@ -52,7 +56,7 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/api/carts
-            
+
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
 

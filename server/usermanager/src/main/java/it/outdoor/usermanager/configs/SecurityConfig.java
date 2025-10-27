@@ -24,8 +24,10 @@ public class SecurityConfig {
                     "/api/user/register",
                     "/api/user/login",
                     "/api/user/working",
+                    "/api/user/pioppo",
                     "/user/register",
-                    "/user/login"
+                    "/user/login",
+                    "/user/pioppo"
                 ).permitAll()
                 .requestMatchers("/api/user/**").authenticated()
                 .anyRequest().authenticated()
