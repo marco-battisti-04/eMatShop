@@ -37,10 +37,10 @@ spring:
           uri: http://192.168.1.19:8998
           predicates:
             - Path=/api/user/login
-        - id: Pioppo
+        - id: Me
           uri: http://192.168.1.19:8998
           predicates:
-            - Path=/api/user/pioppo
+            - Path=/api/user/me
         - id: Customer Registration
           uri: http://192.168.1.19:8998
           predicates:

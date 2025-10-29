@@ -44,10 +44,13 @@ public class UserController {
 
     private final AuthenticationService authenticationService;
 
-    public UserController(JwtService jwtService, AuthenticationService authenticationService) {//, UserService userService) {
+    private final UserService userService;
+
+    public UserController(JwtService jwtService, AuthenticationService authenticationService, UserService userService) {//, UserService userService) {
         // this.userService = userService;
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userService = userService;
     }
 
 
@@ -99,11 +102,11 @@ public class UserController {
         return ResponseEntity.ok(loginResponse);
     }
 
-    @GetMapping("/pioppo")
-    public ResponseEntity<Object> pioppo() {
+    @GetMapping("/me")
+    public ResponseEntity<User> pioppo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Object currentUser = authentication.getPrincipal();
+        User currentUser = (User)authentication.getPrincipal();
         return ResponseEntity.ok(currentUser);
     }
 }
