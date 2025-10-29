@@ -21,7 +21,8 @@ export class PaymentService {
     cvv:"",
     expirationDate:""
   })
+  constructor() {}
+  pay(){
 
-
-  constructor() { }
+  }
 }

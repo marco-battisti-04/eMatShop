@@ -1,0 +1,99 @@
+.card {
+  /* palette armoniosa con il background */
+  background: linear-gradient(135deg, #d0e7f7, #e6e5ff, #ffe0f0);
+  border-radius: 20px;
+  width: 340px;
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #333;
+  position: relative;
+  backdrop-filter: blur(8px); /* leggero effetto vetro */
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  .card__front{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .card__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card__input {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    color: #333;
+    padding: 10px 12px;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: rgba(80, 80, 80, 0.6);
+    }
+
+    &:focus {
+      background: #fff;
+      border-color: #b1b1ff;
+      box-shadow: 0 0 5px rgba(150, 150, 255, 0.4);
+    }
+
+    &[type="month"] {
+      color-scheme: light;
+    }
+
+  }
+
+  .card__number {
+    display: block;
+    box-sizing: border-box;
+  }
+  .card__details {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  /* decorazione discreta */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    pointer-events: none;
+  }
+
+}
+
+.cart{
+  display: flex;
+  gap: 25px;
+  padding: 25px;
+  .bundle{
+    padding: 25px;
+    border: 1px solid aliceblue;
+    box-shadow: inset 0px 0px 10px white;
+    border-radius: 15px;
+  }
+}
+.componentCart{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

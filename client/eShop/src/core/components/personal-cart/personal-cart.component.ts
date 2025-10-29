@@ -9,7 +9,7 @@ import { CartService } from '../../services/cartService/cart.service';
 })
 export class PersonalCartComponent{
   pay() {
-    
+
   }
   readonly service = inject(CartService)
   cvv =model<string>();
