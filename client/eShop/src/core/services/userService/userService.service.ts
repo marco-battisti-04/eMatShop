@@ -8,12 +8,10 @@ import { catchError, of, retry } from 'rxjs';
 })
 export class UserService {
   readonly #user = signal<any>({
-    id:"",
+    id: "",
   });
   readonly userComp = computed(() => this.#user());
-
   readonly #uri: string = "http://192.168.1.19:9999/";
-
   readonly #http = inject(HttpClient);
 
   constructor() { }
@@ -30,15 +28,9 @@ export class UserService {
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
     })
-    .subscribe(resp => {
-      console.log(resp)
+      .subscribe(resp => {
+        console.log(resp)
     })
-    try {
-      //prova a registrarti
-    } catch (e) {
-      // riprova oppure altro
-    }
-
     //nel caso funzioni restituisci la roba del register
     return {
       userId: "",
@@ -54,15 +46,20 @@ export class UserService {
       email,
       password
     })
-    .subscribe(resp => {
-      localStorage.setItem("token", resp.token)
-      this.#user().email = email
-      tmp = resp.token
-    });
+      .subscribe(resp => {
+        localStorage.setItem("token", resp.token)
+        tmp = resp.token
+      });
 
     //nel caso funzioni restituisci la roba del register
     return {
       token: tmp
     }
+  }
+
+  verify() {
+    const token = localStorage.getItem('token') || '';
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.#http.get<any>(this.#uri + 'user/me', { headers });
   }
 }

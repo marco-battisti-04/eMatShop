@@ -21,7 +21,8 @@ export const routes: Routes = [
   },
   {
     path:'cart',
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    // redirectTo: "access#login",
     component: PersonalCartComponent
   }
 ];
