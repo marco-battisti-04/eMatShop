@@ -1,1 +1,55 @@
-<p>personal-cart works!</p>
+<div class="componentCart">
+  <h1>My personal Cart</h1>
+
+  <div class="cart">
+    @for (item of service.cartListComp()?.items; track $index) {
+      <div class="bundle">
+        <h2>{{item.product.title}}</h2>
+        <h4>Price: {{item.product.price}}</h4>
+        <h4>Quantity: {{item.quantity}}</h4>
+      </div>
+    }
+    @empty {
+      <h3>Your cart is Empty</h3>
+    }
+  </div>
+
+  <h4>Total Price: {{service.cartListComp().totalPrice}}</h4>
+
+  <div class="card">
+    <section class="card__inner">
+      <div class="card__front">
+        <h3 class="card__title">Credit Card</h3>
+        <input
+          type="text"
+          placeholder="Card Number"
+          [(ngModel)]="cardNumber"
+          maxlength="19"
+          class="card__input card__number"
+        />
+
+        <div class="card__details">
+          <input
+            id="expMonth"
+            type="month"
+            name="expirationMonth"
+            min=""
+            required
+            [(ngModel)]="expirationDate"
+            class="card__input"
+          />
+
+          <input
+            type="text"
+            maxlength="3"
+            placeholder="CVV"
+            [(ngModel)]="cvv"
+            class="card__input"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <button (click)="pay()">PAY CASH</button>
+</div>

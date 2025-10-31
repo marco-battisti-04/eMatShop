@@ -4,10 +4,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import brave.Response;
 import it.outdoor.usermanager.services.UserService;
 
 import java.util.Optional;
@@ -23,6 +25,8 @@ import it.outdoor.usermanager.repositories.UserRepository;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,10 +44,13 @@ public class UserController {
 
     private final AuthenticationService authenticationService;
 
-    public UserController(JwtService jwtService, AuthenticationService authenticationService) {//, UserService userService) {
+    private final UserService userService;
+
+    public UserController(JwtService jwtService, AuthenticationService authenticationService, UserService userService) {//, UserService userService) {
         // this.userService = userService;
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userService = userService;
     }
 
 
@@ -86,22 +93,20 @@ public class UserController {
         User user = authenticatedUser.orElseThrow();
         String jwtToken = jwtService.generateToken(user);
 
+
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtToken);
+
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
 
         return ResponseEntity.ok(loginResponse);
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<User> pioppo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    // public String login(@RequestBody requestBody) {
-
-
-
-    //     return "";
-
-    //     // boolean isMatch = passwordService.verifyPassword(password, storedHashedPassword);
-    //     // return isMatch ? "Login successful!" : "Invalid credentials.";
-    // }
-
+        User currentUser = (User)authentication.getPrincipal();
+        return ResponseEntity.ok(currentUser);
+    }
 }
