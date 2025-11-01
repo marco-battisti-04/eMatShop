@@ -1,4 +1,7 @@
 spring:
+  security:
+    jwt:
+      secret-key: ${SECURITY_JWT_SECRET_KEY:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
   zipkin:
     baseUrl: ${ZIPKIN_URI:http://localhost:9411/api/v2/spans}
   application:
@@ -53,6 +56,10 @@ spring:
           uri: http://192.168.1.19:7500
           predicates:
             - Path=/carts/**
+        - id: MyCart
+          uri: http://192.168.1.19:7500
+          predicates:
+            - Path=/carts/mycart
           filters:
             - StripPrefix=1
             - PrefixPath=/api/carts

@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import it.outdoor.usermanager.models.User;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,14 +51,17 @@ public class JwtService {
     }
 
     private String buildToken(
-            Map<String, Object> extraClaims,
-            UserDetails userDetails,
-            long expiration
+        Map<String, Object> extraClaims,
+        UserDetails userDetails,
+        long expiration
     ) {
-        return Jwts
-                .builder()
+        // Cast UserDetails to your User class to get userId
+        String userId = ((User) userDetails).getUserId();
+
+        return Jwts.builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(userDetails.getUsername()) // email
+                .claim("userId", userId)              // include userId in the JWT
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

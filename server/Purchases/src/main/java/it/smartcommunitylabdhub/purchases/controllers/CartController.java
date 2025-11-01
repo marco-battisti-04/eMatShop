@@ -23,6 +23,10 @@ public class CartController {
                 cartService.getCart(userId)
         );
     }
+    @GetMapping("/mycart")
+    public String getCart() {
+        return "yes";
+    }
 
     @PostMapping("/{userId}")
     public ResponseEntity<Optional<Cart>> updateCart(@PathVariable String userId, Cart cart) {
