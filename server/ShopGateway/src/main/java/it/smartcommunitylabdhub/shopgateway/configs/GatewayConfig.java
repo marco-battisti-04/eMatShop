@@ -48,13 +48,14 @@ public class GatewayConfig {
 								.setFallbackUri("forward:/fallback/purchase"))
 								.stripPrefix(1).prefixPath("/api/orders"))
 						.uri("lb://purchase"))
+						
 				.route("cart_root", r -> r
 						.path("/cart")
-						.filters(f -> f.setPath("/api/carts"))
+						.filters(f -> f.setPath("/api/cart"))
 						.uri("lb://purchase"))
 				.route("cart_all", r -> r
 						.path("/cart/**")
-						.filters(f -> f.stripPrefix(1).prefixPath("/api/carts"))
+						.filters(f -> f.stripPrefix(1).prefixPath("/api/cart"))
 						.uri("lb://purchase"))
 
 				// sezione USER

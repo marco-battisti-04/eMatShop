@@ -65,8 +65,6 @@ services:
       - EUREKA_URI=http://shop-eureka-server:8761/eureka
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
       - ZIPKIN_URI=http://zipkin:9411/api/v2/spans
-      - AUTH_SECRET_KEY=6fd0d717fe06e90571e0ddeb7b24d1e99e4b58aa9e8e5bd0fbfc37673d2d6834
-      - SECURITY_JWT_SECRET_KEY=3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
     networks:
       - shopnet
     depends_on:

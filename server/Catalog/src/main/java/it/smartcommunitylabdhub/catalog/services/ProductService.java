@@ -29,7 +29,8 @@ public class ProductService {
                                 product.getCategory(),
                                 product.getDescription(),
                                 product.getPrice(),
-                                product.getAvailability()))
+                                product.getAvailability(),
+                                product.getImage()))
                 .toList();
     }
 
@@ -43,7 +44,8 @@ public class ProductService {
                         product.getCategory(),
                         product.getDescription(),
                         product.getPrice(),
-                        product.getAvailability()
+                        product.getAvailability(),
+                        product.getImage()
         ));
     }
 
@@ -58,7 +60,8 @@ public class ProductService {
                                 product.getCategory(),
                                 product.getDescription(),
                                 product.getPrice(),
-                                product.getAvailability()))
+                                product.getAvailability(),
+                                product.getImage()))
                 .toList();
     }
 

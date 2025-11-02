@@ -30,7 +30,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{userId}/get")
     public ResponseEntity<List<OrderDTO>> getOrders() {
        return ResponseEntity.status(200).body(orderService.getOrders());
     }
@@ -46,5 +46,4 @@ public class OrderController {
         OrderDTO order = orderService.checkout(userId, card);
         return ResponseEntity.status(200).body(order);
     }
-
 }

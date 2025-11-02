@@ -53,12 +53,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
-    @GetMapping("/working")
-    public String hello(){
-        return "working";
-    }
-
     /**
      * Register endpoint
      *  input: {
@@ -79,11 +73,16 @@ public class UserController {
      */
     // @PostMapping("/register")
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<?> register(@RequestBody RegisterUserDto registerUserDto) {
 
-        User registeredUser = authenticationService.signup(registerUserDto);
+        Optional<User> user = authenticationService.find(registerUserDto.getEmail());
 
-        return ResponseEntity.ok(registeredUser);
+        if (user.isPresent()) {
+            return ResponseEntity.badRequest().body("User already exists");
+        } else {
+            User registeredUser = authenticationService.signup(registerUserDto);
+            return ResponseEntity.ok(registeredUser);
+        }
     }
 
     @PostMapping("/login")
@@ -93,10 +92,8 @@ public class UserController {
         User user = authenticatedUser.orElseThrow();
         String jwtToken = jwtService.generateToken(user);
 
-
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtToken);
-
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
 
         return ResponseEntity.ok(loginResponse);
