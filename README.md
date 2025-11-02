@@ -4,6 +4,7 @@ Un esempio di progetto **E-Commerce** basato su architettura a microservizi.
 ### 👥 Autori e Collaboratori
 
 Progetto realizzato da:
+
 [![Federico Potrich](https://img.shields.io/badge/GitHub-Federico--Potrich-yellow?logo=github)](https://github.com/federico-potrich)
 [![Marco Battisti](https://img.shields.io/badge/GitHub-Marco--Battisti-blue?logo=github)](https://github.com/marco-battisti-04)
 [![Davide Comper](https://img.shields.io/badge/GitHub-Davide--Comper-green?logo=github)](https://github.com/Davide-Comper)
