@@ -9,16 +9,17 @@ export class AuthGuard implements CanActivate{
   #service = inject(UserService);
   #router = inject(Router);
 
-  async canActivate() {
-    let data = await this.#service.verify()
-    data.subscribe((resp)=>{
-      if(resp.userId == null){
-        this.#router.navigate(['access'], {fragment:'login'})
-    return false;
-      }else{
-        return true
-      }
-    })
-    return false;
+  canActivate() {
+    this.#service.verify()
+    // let data = await this.#service.verify()
+    // data.subscribe((resp)=>{
+    //   if(resp.userId == null){
+    //     this.#router.navigate(['access'], {fragment:'login'})
+    // return false;
+    //   }else{
+    //     return true
+    //   }
+    // })
+    return true;
   }
 };

@@ -11,8 +11,4 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 })
 export class HomepageComponent {
   service = inject(CatalogService)
-  #products = signal<any[]>([])
-
-  productsList = computed<any[]>(()=>this.#products())
-
 }

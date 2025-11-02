@@ -22,7 +22,13 @@ export class PaymentService {
     expirationDate:""
   })
   constructor() {}
-  pay(){
-
+  pay(card : cardDTO){
+    this.#http.post(`${this.#uri}purchase/checkout`, {
+      card
+    }, {
+      headers:{
+        // 'Authentication'
+      }
+    })
   }
 }

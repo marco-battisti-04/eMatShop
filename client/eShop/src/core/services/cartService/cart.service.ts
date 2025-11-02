@@ -15,13 +15,19 @@ export class CartService {
   readonly #serviceUser = inject(UserService);
   readonly #serviceCatalog = inject(CatalogService);
 
+  #userID : string = ""
+
   constructor() {
     this.#serviceCatalog.getProducts()
+    this.#serviceUser.verify().subscribe(user=>{
+      this.#userID = user.userId
+    })
   }
-  public getCart(userID = "68e3c8b1b2f3fa084a052fe4"){
-    this.#http.get(`${this.#uri}cart/${"68e3c8b1b2f3fa084a052fe4"}`, {
+  public getCart(){
+    this.#http.get(`${this.#uri}cart/mycart`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.#serviceUser.returnToken()}`
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
     })
