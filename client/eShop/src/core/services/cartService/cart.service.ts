@@ -36,9 +36,9 @@ export class CartService {
       console.log(resp)
     })
   }
-  public addCart(userID = "68e3c8b1b2f3fa084a052fe4", idProduct = "", quantity=1){
+  public addCart(idProduct : string, quantity=1){
 
-    this.#http.put(`${this.#uri}cart/${userID}/${idProduct}/${quantity}`, {
+    this.#http.put(`${this.#uri}cart/${this.#serviceUser.returnToken()}/${idProduct}/${quantity}`, {
       headers: {
         'Content-Type': 'application/json'
       },

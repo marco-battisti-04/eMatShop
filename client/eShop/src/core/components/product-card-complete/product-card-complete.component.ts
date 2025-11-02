@@ -34,6 +34,6 @@ export class ProductCardCompleteComponent implements OnInit {
     this.#prodotto.set(tmp)
   }
   addToCart(){
-    this.#serviceCart.addCart("68e3c8b1b2f3fa084a052fe4", this.#router.snapshot.params['index'], 1)
+    this.#serviceCart.addCart(this.#router.snapshot.params['index'], 1)
   }
 }
