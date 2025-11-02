@@ -26,9 +26,7 @@ export class PaymentService {
     this.#http.post(`${this.#uri}purchase/checkout`, {
       card
     }, {
-      headers:{
-        // 'Authentication'
-      }
+      headers:{ 'Authorization': `Bearer ${this.#serviceUser.returnToken()}` }
     })
   }
 }
