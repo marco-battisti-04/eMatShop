@@ -1,71 +1,108 @@
-# eMatShop
-An E - commerce example
+# 🛍️ eMatShop
+Un esempio di progetto **E-Commerce** basato su architettura a microservizi.
 
-### Client
-    - TODO: describe the client features
+[![Federico Potrich](https://img.shields.io/badge/GitHub-Federico--Potrich-yellow?logo=github)](https://github.com/federico-potrich)
+[![Marco Battisti](https://img.shields.io/badge/GitHub-Marco--Battisti-blue?logo=github)](https://github.com/marco-battisti-04)
+[![Davide Comper](https://img.shields.io/badge/GitHub-Davide--Comper-green?logo=github)](https://github.com/Davide-Comper)
+[![Graziana Slaifer](https://img.shields.io/badge/GitHub-Graziana--Slaifer-pink?logo=github)](https://github.com/GrazianaSlaifer)
+[![Manuela Nardon](https://img.shields.io/badge/GitHub-Manuela--Nardon-red?logo=github)](https://github.com/manuela-nardon)
 
-### Server
-    - TODO: describe the server features
+---
 
-## Getting Started
-Guida per clonare e avviare il progetto eMatShop in locale utilizzando Docker.
+## 🚀 Getting Started
+Guida per clonare e avviare il progetto **eMatShop** in locale utilizzando **Docker**.
 
-- Aprire il terminale e clonare il repository del progetto:
-`git clone https://www.github.com/marco-battisti-04/eMatShop.git`
+### 1️⃣ Clona il repository
+Clona il progetto con:
 
-- Eseguire il comando `cd eMatShop` per essere sicuro di essere nella directory corretta (deve essere presente il file docker-compose.yml)
+```bash
+git clone https://www.github.com/marco-battisti-04/eMatShop.git
+```
 
-- Una volta posizionato nella directory del progetto, eseguire il comando `docker compose build`, questo comando legge il file docker-compose.yml, costruisce le immagini Docker per ogni microservizio e installa le dipendenze, preparando l'ambiente per ogni container
+### 2️⃣ Entra nella directory del progetto
+```bash
+cd eMatShop
+```
 
-- Per avviare tutti i microservizi in background eseguire il comando:
-`docker compose up -d`
+### 3️⃣ Costruisci le immagini Docker
+```bash
+docker compose build
+```
 
-I servizi, una volta avviati, sono accessibili tramite questi URL nel browser:
-- REGISTRY DEI MICROSERVIZI: porta 8761 per accedere a eureka http://localhost:8761
-- CONFIGURAZIONI CENTRALIZZATE: porta 8888 per accedere a configserver http://localhost:8888
-- TRACCIAMENTO CHIAMATE TRA SERVIZI: porta 9411 per accedere a zipkin http://localhost:9411
-- API GATEWAY PRINCIPALE: porta 9999 per accedere a shopgateway http://localhost:9999
-- GESTIONE DEL CATALOGO PRODOTTI: porta 8082 per accedere a catalog http://localhost:8082
-- GESTIONE DEI PAGAMENTI: porta 8900 per accedere a payment http://localhost:8900
-- GESTIONE ORDINI E ACQUISTI: porta 7500 per accedere a purchase http://localhost:7500
-- GESTIONE UTENTI: porta 8998 per accedere a usermanager http://localhost:8998
+### 4️⃣ Avvia i microservizi
+```bash
+docker compose up -d
+```
 
-- C'è la possibilità di eseguire un singolo microservizio anzichè l'intero progetto, usando il comando: `docker compose build <nome_servizio>`
+### 🌐 Servizi e Porte
 
-Catalog Service	    --> `docker compose build catalog`
+| Servizio                       | Porta | URL                                            | Descrizione                             |
+| ------------------------------ | ----- | ---------------------------------------------- | --------------------------------------- |
+| **Eureka Server (Registry)**   | 8761  | [http://localhost:8761](http://localhost:8761) | Registro dei microservizi               |
+| **Config Server**              | 8888  | [http://localhost:8888](http://localhost:8888) | Gestione configurazioni centralizzate   |
+| **Zipkin**                     | 9411  | [http://localhost:9411](http://localhost:9411) | Tracciamento delle chiamate tra servizi |
+| **API Gateway (Shop Gateway)** | 9999  | [http://localhost:9999](http://localhost:9999) | Punto d’ingresso principale per le API  |
+| **Catalog Service**            | 8082  | [http://localhost:8082](http://localhost:8082) | Gestione del catalogo prodotti          |
+| **Payment Service**            | 8900  | [http://localhost:8900](http://localhost:8900) | Gestione dei pagamenti                  |
+| **Purchase Service**           | 7500  | [http://localhost:7500](http://localhost:7500) | Gestione ordini e acquisti              |
+| **User Manager**               | 8998  | [http://localhost:8998](http://localhost:8998) | Gestione utenti                         |
 
-Payment Service	    --> `docker compose build payment`
+### ⚙️ Avvio di un singolo microservizio
+```bash
+docker compose build <nome_servizio>
+```
 
-Purchase Service    --> `docker compose build purchase`
+Esempi:
+```bash
+docker compose build catalog
+docker compose build payment
+docker compose build purchase
+docker compose build shopgateway
+docker compose build configserver
+docker compose build eurekaserver
+docker compose build zipkin
+docker compose build usermanager
+```
 
-Shop Gateway        --> `docker compose build shopgateway`
+## 🧩 Architettura
 
-Config Server	    --> `docker compose build configserver`
+``` bash
+eMatShop/...
+├── client/...
+|    └── eShop/...
+|    |    ├── public/...
+|    |    ├── src/...
+|    |    ├── .dockerignore
+|    |    ├── .editorconfig
+|    |    ├── angular.json
+|    |    ├── nginx.conf
+|    |    ├── package-lock.json
+|    |    ├── package.json
+|    |    ├── README.md
+|    |    ├── tsconfig.app.json
+|    |    ├── tsconfig.json
+|    |    └── tsconfig.spec.json
+├── server/...
+|    ├── Catalog/...
+|    ├── ConfigurationClient/...
+|    ├── ConfigurationServer/...
+|    ├── kubernetes/...
+|    ├── Payment/...
+|    ├── Purchases/...
+|    ├── RestTemplate/...
+|    ├── ShopEurekaServer/...
+|    ├── ShopGateway/...
+|    ├── usermanager/...
+|    ├── zipkin/...
+|    ├── .README.txt.swp
+|    ├── docker-compose.yml
+|    ├── run.bat
+|    └── run.sh
+├── .gitattributes
+├── .gitignore
+├── LICENCE
+└── README.md
+```
 
-Eureka Server	    --> `docker compose build eurekaserver`
 
-Zipkin              -->	`docker compose build zipkin`
-
-usermanager         --> `docker compose build usermanager`
-
-
-MICROSERVIZI FOR DUMMIES:
-
-1. L’inizio: la richiesta dal client
-
-Tutto parte da un client (un browser, un’app, o un altro servizio) che fa una richiesta HTTP get.
-
-2. API Gateway
-
-Il gateway è la porta d’ingresso unica per tutte le richieste esterne.
-È come un centralino: riceve la chiamata e decide a quale microservizio inoltrarla.
-
-3. Il microservizio Catalog
-
-Si suddivide in diversi passaggi: Controller, Service e Repository.
-
-- Il controller è il punto di ingresso della richiesta all’interno del microservizio.
-È la classe che espone le API.
-- Il service decide come ottenere i dati (es. ordinarli, filtrarli).
-- Repository serve per contattare il DB.
-
+[![Marco Battisti](https://img.shields.io/badge/GitHub-marco--battisti--04-blue?logo=github)](https://github.com/marco-battisti-04)
