@@ -2,13 +2,14 @@ package it.smartcommunitylabdhub.purchases.controllers;
 
 import it.smartcommunitylabdhub.purchases.models.Cart;
 import it.smartcommunitylabdhub.purchases.services.CartService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/carts")
+@RequestMapping("/api/cart")
 public class CartController {
 
     private final CartService cartService;
@@ -17,16 +18,27 @@ public class CartController {
         this.cartService = cartService;
     }
 
+    // temp mycart
     @GetMapping("/{userId}")
     public ResponseEntity<Optional<Cart>> getCart(@PathVariable String userId) {
         return ResponseEntity.status(200).body(
                 cartService.getCart(userId)
         );
     }
-    @GetMapping("/mycart")
-    public String getCart() {
-        return "yes";
-    }
+
+    // TODO: need to fix, instead of above code do this
+    // @GetMapping("/mycart")
+    // public ResponseEntity<Optional<Cart>> getCart() {
+
+    //     // String userId = jwtService.extractEmail(token);
+        
+        
+    //     return ResponseEntity.status(200).body(
+    //             // cartService.getCart(userId)
+    //     );
+
+    //     // return ResponseEntity.ok("yes");
+    // }
 
     @PostMapping("/{userId}")
     public ResponseEntity<Optional<Cart>> updateCart(@PathVariable String userId, Cart cart) {

@@ -43,6 +43,10 @@ public class AuthenticationService {
         return userRepository.save(user);
     }
 
+    public Optional<User> find(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public Optional<User> authenticate(LoginUserDto input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

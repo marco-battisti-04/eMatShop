@@ -21,25 +21,20 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .csrf(csrf -> csrf.disable())
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .pathMatchers(
-                            "/api/user/login",
-                            "/api/user/register",
                             "/user/login",
                             "/user/register",
-                            "/catalog/**"
+                            "/catalog"
                         ).permitAll()
                         .pathMatchers(
-                            "/api/user/me",
-                            "/api/carts/mycart",
                             "/user/me",
-                            "/carts/mycart",
-                            "/api/carts/**",
-                            "/carts/**"
+                            "/cart/**",
+                            "/purchase/**"
                         ).authenticated()
-                        .anyExchange().authenticated()
+                        // .anyExchange().authenticated()
                 )
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 .addFilterAt(jwtWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)

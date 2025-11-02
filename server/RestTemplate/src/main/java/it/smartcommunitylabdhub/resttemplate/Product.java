@@ -17,5 +17,7 @@ public class Product {
     private String description;
     private Long price;
     private Integer availability;
+
+    private String image;
 }
 

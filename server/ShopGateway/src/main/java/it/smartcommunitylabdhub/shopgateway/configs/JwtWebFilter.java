@@ -29,23 +29,31 @@ public class JwtWebFilter implements WebFilter {
 
         if (token != null && jwtService.isTokenValid(token)) {
             String username = jwtService.extractEmail(token);
-            String userId = jwtService.extractUserID(token); // <-- ora funziona
+            String userId = jwtService.extractUserID(token);
+            System.out.println("USER ID: " + userId);
             System.out.println(username);
             ServerHttpRequest request = exchange.getRequest();
             String path = request.getURI().getPath();
-            if (path.equals("/carts/mycart")) {
-                String newPath = "/carts/" + userId;
-                ServerHttpRequest newRequest = request.mutate()
-                        .path(newPath)
-                        .build();
-                exchange = exchange.mutate().request(newRequest).build();
+
+            if (path.indexOf("user/me") == -1) {
+
+                int index = path.indexOf("/me");
+
+                if (index != -1) {
+                    String newPath = path.substring(0, index) + "/"+ userId + path.substring(index + 3);
+                    ServerHttpRequest newRequest = request.mutate()
+                    .path(newPath)
+                    .method(request.getMethod())
+                    .build();
+                    exchange = exchange.mutate().request(newRequest).build();
+
+                    System.out.println("NEW PATH: " + newPath);
+                }
             }
 
             Authentication auth = new UsernamePasswordAuthenticationToken(username, null, List.of());
             return chain.filter(exchange).contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));
         }
-
-
         return chain.filter(exchange);
     }
 
