@@ -11,17 +11,19 @@ import { PaymentService } from '../../services/paymentService/payment.service';
 export class PersonalCartComponent{
   readonly service = inject(CartService)
   readonly #payService = inject(PaymentService)
+
   cvv =model<string>();
   cardNumber =model<string>();
   expirationDate = model<string>();
+
   constructor(){
     this.service.getCart()
   }
   pay() {
     this.#payService.pay({
-      "cvv":""+this.cvv,
-      "cardNumber":""+this.cardNumber,
-      "expirationDate":""+this.expirationDate
+      "cvv":""+this.cvv(),
+      "cardNumber":""+this.cardNumber(),
+      "expirationDate":""+this.expirationDate()
     })
   }
 }

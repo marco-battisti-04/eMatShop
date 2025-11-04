@@ -3,6 +3,14 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { UserService } from '../userService/userService.service';
 import { CatalogService } from '../catalogService/catalog.service';
 
+// Interfaccia per il prodotto nel carrello
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,43 +18,75 @@ export class CartService {
   readonly #uri: string = "http://192.168.1.19:9999/";
 
   readonly #http = inject(HttpClient);
-  readonly #cartList = signal<any>({}) //da aggiungere che sia un interfaccia prodotto
-  readonly cartListComp = computed<any>(()=>this.#cartList()) //da aggiungere che sia un interfaccia prodotto
+  readonly #cartList = signal<CartItem[]>([]); // Modifica il tipo in base ai dati reali del carrello
+  readonly cartListComp = computed<CartItem[]>(() => this.#cartList());
   readonly #serviceUser = inject(UserService);
   readonly #serviceCatalog = inject(CatalogService);
 
-  #userID : string = ""
+  #userID: string = "";
 
   constructor() {
-    this.#serviceCatalog.getProducts()
-    this.#serviceUser.verify().subscribe(user=>{
-      this.#userID = user.userId
-    })
+    this.#serviceCatalog.getProducts();
+    this.#serviceUser.verify().subscribe(user => {
+      this.#userID = user.userId;
+    });
   }
-  public getCart(){
-    this.#http.get(`${this.#uri}cart/mycart`, {
+
+  public getCart() {
+    const token = this.#serviceUser.returnToken();
+    if (!token) {
+      console.error('Token mancante');
+      return;
+    }
+
+    this.#http.get<any>(`${this.#uri}cart/me`, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.#serviceUser.returnToken()}`
+        'Authorization': `Bearer ${token}`
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
-    })
-    .subscribe(resp => {
-      this.#cartList.set(resp)
-      console.log(resp)
-    })
+    }).subscribe({
+      next: (resp) => {
+        this.#cartList.set(resp);
+        console.log(resp);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          console.error('Token scaduto o non valido');
+          // Gestisci il rinnovo del token o la logica di logout
+        } else {
+          console.error('Errore nella richiesta:', err);
+        }
+      }
+    });
   }
-  public addCart(idProduct : string, quantity=1){
 
-    this.#http.put(`${this.#uri}cart/${this.#serviceUser.returnToken()}/${idProduct}/${quantity}`, {
+  public addCart(idProduct: string, quantity = 1) {
+    const token = this.#serviceUser.returnToken();
+    if (!token) {
+      console.error('Token mancante');
+      return;
+    }
+
+    this.#http.put<CartItem[]>(`${this.#uri}cart/${this.#userID}/${idProduct}/${quantity}`, {}, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
-    })
-    .subscribe(resp => {
-      this.#cartList.set(resp)
-      console.log(resp)
-    })
+    }).subscribe({
+      next: (resp) => {
+        this.#cartList.set(resp);
+        console.log(resp);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          console.error('Token scaduto o non valido');
+          // Gestisci il rinnovo del token o la logica di logout
+        } else {
+          console.error('Errore nella richiesta:', err);
+        }
+      }
+    });
   }
 }

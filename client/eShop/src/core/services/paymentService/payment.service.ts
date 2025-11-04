@@ -23,10 +23,13 @@ export class PaymentService {
   })
   constructor() {}
   pay(card : cardDTO){
-    this.#http.post(`${this.#uri}purchase/checkout`, {
+    this.#http.post(`${this.#uri}order/me`, {
       card
     }, {
-      headers:{ 'Authorization': `Bearer ${this.#serviceUser.returnToken()}` }
+      headers:{ 'Authorization': `Bearer ${this.#serviceUser.returnToken()}` },
+      withCredentials:false
+    }).subscribe(res=>{
+      console.log(res)
     })
   }
 }
