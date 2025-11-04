@@ -7,7 +7,7 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-FROM openjdk:21
+FROM eclipse-temurin:21
 
 WORKDIR /app
 COPY --from=build /app/target/Payment-0.0.1-SNAPSHOT.jar .
