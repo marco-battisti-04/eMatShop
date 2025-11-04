@@ -47,6 +47,7 @@ public class JwtWebFilter implements WebFilter {
                     .build();
                     exchange = exchange.mutate().request(newRequest).build();
 
+                    System.out.println(exchange.getRequest().getMethod());
                     System.out.println("NEW PATH: " + newPath);
                 }
             }
