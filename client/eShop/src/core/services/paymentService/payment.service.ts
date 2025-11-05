@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { UserService } from '../userService/userService.service';
 import { CartService } from '../cartService/cart.service';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,14 @@ export class PaymentService {
   })
   constructor() {}
   pay(card : cardDTO){
-    this.#http.post(`${this.#uri}order/me`, {
+    this.#http.post(`${this.#uri}purchase/checkout/me`, {
       card
     }, {
       headers:{ 'Authorization': `Bearer ${this.#serviceUser.returnToken()}` },
       withCredentials:false
-    }).subscribe(res=>{
+    })
+    .pipe(retry(5))
+    .subscribe(res=>{
       console.log(res)
     })
   }

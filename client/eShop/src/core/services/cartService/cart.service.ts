@@ -18,8 +18,8 @@ export class CartService {
   readonly #uri: string = "http://192.168.1.19:9999/";
 
   readonly #http = inject(HttpClient);
-  readonly #cartList = signal<CartItem[]>([]); // Modifica il tipo in base ai dati reali del carrello
-  readonly cartListComp = computed<CartItem[]>(() => this.#cartList());
+  readonly #cartList = signal<any>({}); // Modifica il tipo in base ai dati reali del carrello
+  readonly cartListComp = computed<any>(() => this.#cartList());
   readonly #serviceUser = inject(UserService);
   readonly #serviceCatalog = inject(CatalogService);
 
@@ -45,19 +45,9 @@ export class CartService {
         'Authorization': `Bearer ${token}`
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
-    }).subscribe({
-      next: (resp) => {
+    }).subscribe(resp=>{
         this.#cartList.set(resp);
         console.log(resp);
-      },
-      error: (err) => {
-        if (err.status === 401) {
-          console.error('Token scaduto o non valido');
-          // Gestisci il rinnovo del token o la logica di logout
-        } else {
-          console.error('Errore nella richiesta:', err);
-        }
-      }
     });
   }
 
@@ -74,9 +64,9 @@ export class CartService {
         'Authorization': `Bearer ${token}`
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
-    }).subscribe({
+    })
+    .subscribe({
       next: (resp) => {
-        this.#cartList.set(resp);
         console.log(resp);
       },
       error: (err) => {

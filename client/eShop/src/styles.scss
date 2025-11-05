@@ -9,3 +9,22 @@
 body{
   background-image: radial-gradient(circle at 150%, #9ed1ec,#C7CEFF, #FEC5E5);
 }
+.back{
+  margin-left: 15px;
+  margin-top: 10px;
+  align-self: flex-start;
+  font-weight: bolder;
+  background-image: linear-gradient(135deg, #a0a0ff, #ffc4e4, #b6e6ff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.623);
+  text-decoration: none;
+  transition: 0.3s ease;
+
+  &:hover{
+    -webkit-text-stroke: 0.5px #000; /* puoi accentuare il bordo */
+    transform: scale(1.05); /* leggero ingrandimento */
+    cursor: pointer; /* mano quando ci passi sopra */
+    background-image: linear-gradient(135deg, #ffc4e4, #b6e6ff, #a0a0ff);
+  }
+}
