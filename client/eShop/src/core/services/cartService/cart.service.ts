@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { UserService } from '../userService/userService.service';
 import { CatalogService } from '../catalogService/catalog.service';
+import { Router } from '@angular/router';
 
 // Interfaccia per il prodotto nel carrello
 interface CartItem {
@@ -17,6 +18,7 @@ interface CartItem {
 export class CartService {
   readonly #uri: string = "http://192.168.1.19:9999/";
 
+  readonly #router = inject(Router)
   readonly #http = inject(HttpClient);
   readonly #cartList = signal<any>({}); // Modifica il tipo in base ai dati reali del carrello
   readonly cartListComp = computed<any>(() => this.#cartList());
@@ -45,9 +47,20 @@ export class CartService {
         'Authorization': `Bearer ${token}`
       },
       withCredentials: false  // solo se il backend usa i cookie/sessione
-    }).subscribe(resp=>{
+    }).subscribe({
+      next: (resp) => {
         this.#cartList.set(resp);
-        console.log(resp);
+      },
+      error: (err) => {
+        console.log(err.status)
+        if (err.status === 401) {
+          console.error('Token scaduto o non valido');
+          // Gestisci il rinnovo del token o la logica di logout
+        } else {
+          console.error('Errore nella richiesta:', err);
+          this.#router.navigate(['/access'], {fragment:'login'})
+        }
+      }
     });
   }
 
