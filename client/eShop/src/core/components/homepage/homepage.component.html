@@ -6,7 +6,17 @@
       <img src="icon.png" alt="eMatShop Logo" style="border-radius: 8px; margin-right: 12px;">
       <span style="font-size: 2rem; font-weight: 700; color: #2d3748;">eMatShop</span>
     </div>
-    <a [routerLink]="'/cart'">My Cart</a>
+
+    <div class="cart">
+      <a [routerLink]="'/cart'">My Cart</a>
+      <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+      <path d="M17,14H4c-0.6,0-1-0.4-1-1V2H0V0h4c0.6,0,1,0.4,1,1v11h11.2l1.5-6H7V4h12c0.6,0,1.1,0.6,1,1.2l-2,8C17.9,13.7,17.5,14,17,14
+        z"/>
+      <circle cx="5" cy="18" r="2"/>
+      <circle cx="16" cy="18" r="2"/>
+      </svg>
+    </div>
     <form style="display: flex; align-items: center; width: 100%;">
       <input type="text" placeholder="Search products..." style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px 0 0 6px; outline: none; width: 100%;">
       <button type="submit" style="padding: 8px 16px; border: none; background: #3182ce; color: #fff; border-radius: 0 6px 6px 0; cursor: pointer;">Search</button>

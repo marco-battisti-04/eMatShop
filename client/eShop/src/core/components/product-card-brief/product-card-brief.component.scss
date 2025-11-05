@@ -1,9 +1,14 @@
 img{
   transform: scale(1);
+  transition: 1s ease;
 
 }
-img::hover{
+.container:hover{
+  img{
   transform: scale(1.2);
+  rotate: random(10)+deg;
+  transition: 1s ease;
+  }
 }
 p{
   overflow:hidden;

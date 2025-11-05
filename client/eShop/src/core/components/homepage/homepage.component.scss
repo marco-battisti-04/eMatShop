@@ -39,3 +39,35 @@ header{
     }
   }
 }
+.cart{
+  display: flex;
+  flex-direction: row-reverse !important;
+  align-items: center;
+  justify-content: space-around;
+  width: 100px;
+  transition: all 1s ease;
+
+  svg{
+    fill: rgba(255, 255, 255, 0);
+    filter: drop-shadow(0px 0px 4px #3a3ad600);
+    transition: all .7s ease;
+    transform: translateX(0);
+  }
+
+  a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #3a3ad6;
+    transition: all .4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  a:hover{
+    border-bottom: 1px solid;
+  }
+
+  &:has(a:hover) svg{
+    fill: rgb(255, 255, 255) !important;
+    filter: drop-shadow(0px 0px 4px #3a3ad6) !important;
+    transform: translateX(100px);
+  }
+}
