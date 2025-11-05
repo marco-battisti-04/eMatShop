@@ -71,5 +71,4 @@ export class LoginComponent{
     this.#ROUTER.navigate(["/"])
 
   }
-
 }

@@ -30,7 +30,7 @@ export class PaymentService {
       headers:{ 'Authorization': `Bearer ${this.#serviceUser.returnToken()}` },
       withCredentials:false
     })
-    .pipe(retry(5))
+    .pipe(retry(10))
     .subscribe(res=>{
       console.log(res)
     })
