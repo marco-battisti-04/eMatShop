@@ -28,6 +28,8 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    // creazione di un nuovo utente dal dto di registrazione
     public User signup(RegisterUserDto input) {
         // User user = new User()
         //         .setFullName(input.getFullName())
@@ -37,16 +39,19 @@ public class AuthenticationService {
         user.setName(input.getName());
         user.setSurname(input.getSurname());
         user.setEmail(input.getEmail());
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setPassword(passwordEncoder.encode(input.getPassword())); // funzione di creazione dell'hash
 
 
+        // salva il nuovo utente e lo ritorna
         return userRepository.save(user);
     }
 
+    // cerca un'utente tramite email (per autenticazione)
     public Optional<User> find(String email) {
         return userRepository.findByEmail(email);
     }
 
+    // prova l'autenticazione di un utente
     public Optional<User> authenticate(LoginUserDto input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

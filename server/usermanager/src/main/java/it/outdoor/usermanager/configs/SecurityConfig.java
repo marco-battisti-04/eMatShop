@@ -42,9 +42,9 @@ public class SecurityConfig {
                 "/user/login",
                 "/user/working",
                 "/user/me"
-            ).permitAll()
-            .requestMatchers("/api/user/**").authenticated()
-            .anyRequest().authenticated()
+            ).permitAll() // tutte le route che sono qua sopra non richiedono autenticazione
+            .requestMatchers("/api/user/**").authenticated() // tutte le /api/user hanno bisogno di autenticazione
+            .anyRequest().authenticated() // tutte le altre route non elencate richiedono l'autenticazione
         )
         .httpBasic(httpBasic -> httpBasic.disable())
         .formLogin(form -> form.disable());

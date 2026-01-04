@@ -43,7 +43,7 @@ public class JwtWebFilter implements WebFilter {
                     String newPath = path.substring(0, index) + "/"+ userId + path.substring(index + 3);
                     ServerHttpRequest newRequest = request.mutate()
                     .path(newPath)
-                    .method(request.getMethod())
+                    // .method(request.getMethod())
                     .build();
                     exchange = exchange.mutate().request(newRequest).build();
 

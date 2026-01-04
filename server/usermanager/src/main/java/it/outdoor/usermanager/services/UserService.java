@@ -20,10 +20,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // declaring the hash service
-
-    //    List products: /api/products
-    public List<UserDTO> getAllProducts() {
+    // ritorna tutti gli utenti sottoforma di lista
+    public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map(user ->
             new UserDTO(
                 user.getUserId(),
@@ -35,36 +33,7 @@ public class UserService {
         ).toList();
     }
 
-    //    Get product by Id: /api/products/{id})
-    // public Optional<ProductDTO> getProductById(String id) {
-    //     return userRepository.findById(id).map(product ->
-    //             new ProductDTO(
-    //                     product.getId(),
-    //                     product.getCode(),
-    //                     product.getTitle(),
-    //                     product.getCategory(),
-    //                     product.getDescription(),
-    //                     product.getPrice(),
-    //                     product.getAvailability()
-    //     ));
-    // }
-
-    //    Search by category: /api/products/category/{category}
-    // public List<ProductDTO> getProductsByCategory(String category) {
-    //     return userRepository.findByCategory(category)
-    //             .stream().map(product ->
-    //                     new ProductDTO(
-    //                             product.getId(),
-    //                             product.getCode(),
-    //                             product.getTitle(),
-    //                             product.getCategory(),
-    //                             product.getDescription(),
-    //                             product.getPrice(),
-    //                             product.getAvailability()))
-    //             .toList();
-    // }
-
-    //Create product: POST /api/products
+    // funzione per creare un nuovo utente
     public UserDTO createUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
@@ -79,10 +48,12 @@ public class UserService {
     }
 
 
+    // fa l'hash della password per la creazione
     public String hashPassword(String rawPassword) {
         return passwordEncoder.encode(rawPassword);
     }
 
+    // controlla la password facendo un match tra gli hash
     public boolean verifyPassword(String rawPassword, String hashedPassword) {
         return passwordEncoder.matches(rawPassword, hashedPassword);
     }
