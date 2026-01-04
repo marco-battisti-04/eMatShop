@@ -2,9 +2,11 @@ import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { Component, inject, model } from '@angular/core';
 import { CartService } from '../../services/cartService/cart.service';
 import { PaymentService } from '../../services/paymentService/payment.service';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-personal-cart',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './personal-cart.component.html',
   styleUrl: './personal-cart.component.scss'
 })

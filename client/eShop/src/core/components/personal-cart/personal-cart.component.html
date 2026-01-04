@@ -1,8 +1,9 @@
 <div class="componentCart">
+  <a class="back" [routerLink]="['/']" routerLinkActive="router-link-active" >Go back</a>
   <h1>My personal Cart</h1>
 
   <div class="cart">
-    @for (item of service.cartListComp()?.items; track $index) {
+    @for (item of service.cartListComp().items; track $index) {
       <div class="bundle">
         <h2>{{item.product.title}}</h2>
         <h4>Price: {{item.product.price}}</h4>
@@ -14,7 +15,7 @@
     }
   </div>
 
-  <h4>Total Price: {{service.cartListComp().totalPrice}}</h4>
+  <!-- <h4>Total Price: {{service.cartListComp()?.totalPrice}}</h4> -->
 
   <div class="card">
     <section class="card__inner">

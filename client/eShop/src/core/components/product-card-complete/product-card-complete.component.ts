@@ -1,11 +1,11 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CatalogService } from '../../services/catalogService/catalog.service';
 import { CartService } from '../../services/cartService/cart.service';
 
 @Component({
   selector: 'app-product-card-complete',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './product-card-complete.component.html',
   styleUrl: './product-card-complete.component.scss'
 })

@@ -68,6 +68,7 @@ export class LoginComponent{
     if(this.pwdLogin()?.trim() == "")
       return
     this.#service.login(this.emailLogin()||"",this.pwdLogin()||"")
-  }
+    this.#ROUTER.navigate(["/"])
 
+  }
 }

@@ -22,7 +22,7 @@ export class CatalogService {
   */
   public getProducts() {
     this.#http.get(/*`${this.#uri}catalog`*/ "http://192.168.1.19:9999/catalog")
-    .pipe(retry(5))
+    .pipe(retry(20))
     .subscribe(async (res) => {
       await this.#productList.set(res as [])
     })
