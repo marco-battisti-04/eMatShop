@@ -28,12 +28,17 @@ git clone https://www.github.com/marco-battisti-04/eMatShop.git
 cd eMatShop
 ```
 
-### 3️⃣ Costruisci le immagini Docker
+### 3️⃣ Entra nella cartella del server
+```bash
+cd server
+```
+
+### 4️⃣ Costruisci le immagini Docker
 ```bash
 docker compose build
 ```
 
-### 4️⃣ Avvia i microservizi
+### 5️⃣ Avvia i microservizi
 ```bash
 docker compose up -d
 ```
@@ -107,6 +112,3 @@ eMatShop/...
 ├── LICENCE
 └── README.md
 ```
-
-
-[![Marco Battisti](https://img.shields.io/badge/GitHub-marco--battisti--04-blue?logo=github)](https://github.com/marco-battisti-04)
