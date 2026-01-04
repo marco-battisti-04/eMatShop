@@ -25,23 +25,28 @@ public class JwtService {
     @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
 
+    // estrae il username dal token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
+    // estrae il userId dal token
     public String extractUserID(String token) {
         return extractClaim(token, Claims::getId);
     }
 
+    // estrae il claim dal token
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
+    // genera un nuovo torken per l'utente (viene chiamata questa dalle altre parti del codice)
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
+    // funzione piu specifica
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }

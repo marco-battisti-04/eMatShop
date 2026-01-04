@@ -3,7 +3,7 @@ package it.outdoor.usermanager.responses;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
+@Getter // decoratori
 @Setter
 public class LoginResponse {
     private String token;
